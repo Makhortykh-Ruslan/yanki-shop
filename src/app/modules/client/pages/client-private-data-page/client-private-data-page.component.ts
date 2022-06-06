@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SettingNavigationClientPage} from './settings';
+import {CartService} from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-client-private-data-page',
@@ -8,9 +9,16 @@ import {SettingNavigationClientPage} from './settings';
 })
 export class ClientPrivateDataPageComponent implements OnInit {
   settingNavigationClientPage = SettingNavigationClientPage;
-  constructor() { }
+  constructor(
+      private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onChange(elem: any) {
+    localStorage.setItem('idToken', '')
+    this.cartService.cartStore$.next([]);
+
+  }
 }

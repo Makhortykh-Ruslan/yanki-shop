@@ -4,6 +4,7 @@ import {CustomerInterface} from '../../../../../interfaces/customer-interface';
 import {AuthService} from '../../../../../services/auth.service';
 import {NotificationsService} from '../../../../../services/notifications.service';
 import {MatDialog} from '@angular/material/dialog';
+import {CartService} from '../../../../../services/cart.service';
 
 @Component({
   selector: 'app-registration',
@@ -27,6 +28,7 @@ export class RegistrationComponent implements OnInit {
       private notificationsService: NotificationsService,
       public authService: AuthService,
       public dialog: MatDialog,
+      private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -34,23 +36,22 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.formRegistration.invalid) { return; }
-    // this.notificationsService.preloader$.next(true);
     const customerDopParams = {
       gender: 'woman',
       isAdmin: false
     };
+    const authAfterRegistrations = {
+      loginOrEmail: this.formRegistration.value.email,
+      password: this.formRegistration.value.password
+    }
     const newCustomer: CustomerInterface = {...this.formRegistration.value, ...customerDopParams};
     this.authService.registration(newCustomer).subscribe(res => {
-      console.log('hello new User', res)
-      this.formRegistration.reset();
-      this.dialog.closeAll();
-      this.notificationsService.notificationDialogSuccess('registration');
-      // this.notificationsService.preloader$.next(false);
-
-    }, error => {
-      // this.notificationsService.preloader$.next(false);
-    }, () => {
-      // this.notificationsService.preloader$.next(false);
+      this.authService.login(authAfterRegistrations).subscribe(res => {
+        this.cartService.createCartDB();
+        this.formRegistration.reset();
+        this.dialog.closeAll();
+        this.notificationsService.notificationDialogSuccess('registration');
+      })
     });
 
   }

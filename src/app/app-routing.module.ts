@@ -12,6 +12,8 @@ import {
 import {
   ClientPrivateDataPrivateComponent
 } from './modules/client/pages/client-private-data-private/client-private-data-private.component';
+import {CartPageComponent} from './modules/client/pages/cart-page/cart-page.component';
+import {CartGuard} from './guards/cart.guard';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, children: [
@@ -25,6 +27,7 @@ const routes: Routes = [
       {path: 'clientOrder', component: ClientPrivateOrdersComponent},
       {path: 'client', component: ClientPrivateDataPrivateComponent}
     ], canActivate: [AuthGuardGuard]},
+  {path: 'cart', component: CartPageComponent, canActivate: [CartGuard]}
   // {path: '', loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule)},
   // {path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuardGuard]},
 ];

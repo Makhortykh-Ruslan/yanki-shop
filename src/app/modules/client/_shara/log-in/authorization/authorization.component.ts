@@ -3,9 +3,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationsService} from '../../../../../services/notifications.service';
 import {AuthService} from '../../../../../services/auth.service';
 import {User} from '../../../../../interfaces/auth-interface';
-import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {CartService} from '../../../../../services/cart.service';
 
 @Component({
   selector: 'app-authorization',
@@ -23,27 +23,24 @@ export class AuthorizationComponent implements OnInit {
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(
       private notificationsService: NotificationsService,
-      public authService: AuthService,
+      private authService: AuthService,
       private router: Router,
       public dialog: MatDialog,
+      private cartService: CartService
   ) { }
 
   ngOnInit(): void {
-    // this.authService.error$.subscribe(error => {
-    //   console.log('hello', error)
-    // });
+
   }
 
   onSubmit(): void {
     if (this.authForm.invalid) { return; }
     this.submitted = true;
-    // this.notificationsService.notificationPreloader(true);
     const user: User = {...this.authForm.value};
     this.authService.login(user).subscribe(res => {
       this.onGetCustomer();
       }, (error) => {
           this.submitted = false;
-          // this.notificationsService.notificationPreloader(false);
           }
       );
   }
@@ -55,15 +52,13 @@ export class AuthorizationComponent implements OnInit {
     this.authService.getCustomer().subscribe(res => {
       this.submitted = false;
       this.authForm.reset();
+      this.cartService.getCartDB();
       this.dialog.closeAll();
       sessionStorage.setItem('customer', JSON.stringify(res));
       this.notificationsService.notificationDialogSuccess('auth', res);
       this.router.navigate(['/clientAccount']);
     }, error => {
       this.submitted = false;
-      // this.notificationsService.notificationPreloader(false);
-    }, () => {
-      // this.notificationsService.notificationPreloader(false);
     });
   }
 }

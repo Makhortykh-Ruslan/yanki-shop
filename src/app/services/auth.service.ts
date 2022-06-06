@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {User} from '../interfaces/auth-interface';
 import {environment} from '../../environments/environment.prod';
-import {catchError, tap} from 'rxjs/operators';
-import {getToken} from 'codelyzer/angular/styles/cssLexer';
+import {tap} from 'rxjs/operators';
 import {CustomerInterface} from '../interfaces/customer-interface';
 
 @Injectable({
@@ -14,7 +13,9 @@ export class AuthService {
   error$: Subject<string> = new Subject<string>();
   success$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+      private http: HttpClient,
+      ) { }
 
   get getToken(): string | null{
     return  localStorage.getItem('idToken');
@@ -27,16 +28,12 @@ export class AuthService {
   }
   registration(newCustomer: CustomerInterface): Observable<any>{
     return this.http.post<CustomerInterface>(`${environment.api}/customers`, newCustomer)
-        .pipe(
-            catchError(this.handleError.bind(this))
-        );
   }
 
   login(user: User): Observable<any>{
     return this.http.post(`${environment.api}/customers/login`, user)
         .pipe(
             tap(this.setToken),
-            catchError(this.handleError.bind(this))
         );
   }
 
@@ -45,14 +42,13 @@ export class AuthService {
   }
 
   private setToken(response: any | null): void {
-    console.log('token', response)
     if (response){
       localStorage.setItem('idToken', response.token);
     }else {
       localStorage.clear();
     }
   }
-  private handleError(error: HttpErrorResponse): Observable<string>{
+  public handleError(error: any): Observable<string>{
     const {password, loginOrEmail, telephone, email, message, login} = error.error;
     switch (password || loginOrEmail || telephone || email || message || login){
       case 'INVALID_EMAIL':

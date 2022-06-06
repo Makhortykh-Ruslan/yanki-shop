@@ -47,6 +47,7 @@ import {NotificationsService} from './services/notifications.service';
 import { ClientPrivateOrdersComponent } from './modules/client/pages/client-private-orders/client-private-orders.component';
 import { ClientPrivateDataPrivateComponent } from './modules/client/pages/client-private-data-private/client-private-data-private.component';
 import {PreloaderInterceptor} from './Interceptor/preloader.interceptor';
+import { CartPageComponent } from './modules/client/pages/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {PreloaderInterceptor} from './Interceptor/preloader.interceptor';
     CategoriesPipe,
     HumburgerMenuComponent,
     ClientPrivateOrdersComponent,
-    ClientPrivateDataPrivateComponent
+    ClientPrivateDataPrivateComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,

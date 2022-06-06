@@ -36,7 +36,7 @@ export const iconsArr: NavigateLink[] = [
   // },
   {
     name: 'cart',
-    link: '',
+    link: '/cart',
     iconLink: 'assets/icons/icon-basket.svg'
   }
 ];

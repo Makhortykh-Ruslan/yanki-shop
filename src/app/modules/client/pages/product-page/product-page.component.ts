@@ -4,6 +4,9 @@ import {NotificationsService} from '../../../../services/notifications.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from '../../../../interfaces/products-interface';
+import {CartService} from '../../../../services/cart.service';
+import {logger} from 'codelyzer/util/logger';
+import {AuthService} from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-product-page',
@@ -17,35 +20,28 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   public dataProduct: Product | undefined;
   public sizes = ['xs', 's', 'm', 'l', 'xl'];
   private $subParams: Subscription | undefined;
+  private allProducts: any;
+  private getOneProduct: Product | undefined;
 
   constructor(
       private productsService: ProductsService,
       private notificationsService: NotificationsService,
-      private router: ActivatedRoute
+      private router: ActivatedRoute,
+      private cartService: CartService,
+      private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
-    console.log('hello param', this.router.snapshot.params.id);
     this.getProduct(this.router.snapshot.params.id);
-    // this.$subParams = this.router.params.subscribe(params => {
-    //   this.getProduct(params['id']);
-    // });
   }
 
   getProduct(id: string): void {
-    // @ts-ignore
-    const allProducts = JSON.parse(localStorage.getItem('allProducts'));
-    const getProduct = allProducts.products.find((elem: Product) => elem.itemNo === id);
-    this.imagesProduct = getProduct.imageUrls;
-    this.dataProduct = getProduct;
+    this.allProducts = this.cartService.getAllProducts();
+    this.getOneProduct = this.allProducts.find((elem: Product) => elem.itemNo === id);
+    this.imagesProduct = this.getOneProduct?.imageUrls;
+    this.dataProduct = this.getOneProduct;
     this.getTitleImg(this.imagesProduct)
-    // this.productsService.getOneProduct(id).subscribe(res => {
-    //   this.imagesProduct = res.imageUrls;
-    //   this.dataProduct = res;
-    //   console.log('hello onew product', res);
-    //   this.getTitleImg(this.imagesProduct);
-    // });
   }
 
   ngOnDestroy(): void {
@@ -63,4 +59,17 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   }
 
 
+  onAddToCartProduct() {
+    if(!this.authService.getToken){
+      this.cartService.addProduct(this.getOneProduct);
+      this.notificationsService.notificationDialogSuccess(`${this.getOneProduct?.name}, добавлено в корзину!`)
+    }else {
+      this.cartService.addProductOnCartDB(this.getOneProduct?._id).subscribe(res => {
+        // @ts-ignore
+        this.cartService.cartStore$.next(res.products)
+        this.notificationsService.notificationDialogSuccess(`${this.getOneProduct?.name}, добавлено в корзину!`)
+      })
+    }
+
+  }
 }

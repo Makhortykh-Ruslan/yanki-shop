@@ -1,6 +1,6 @@
 <section>
   <ul class="client-private-wrapper">
-    <li [routerLinkActiveOptions]="{exact:true}" class="client-private-item" routerLinkActive="active" [routerLink]="elem.linkRouter" *ngFor="let elem of settingNavigationClientPage">{{elem.nameTab}}</li>
+    <li (click)="onChange(elem)" [routerLinkActiveOptions]="{exact:true}" class="client-private-item" routerLinkActive="active" [routerLink]="elem.linkRouter" *ngFor="let elem of settingNavigationClientPage">{{elem.nameTab}}</li>
   </ul>
   <router-outlet></router-outlet>
 </section>
