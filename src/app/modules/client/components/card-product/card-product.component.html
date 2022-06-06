@@ -1,0 +1,18 @@
+<section *ngIf="data; else elseBlock" class="card-product-wrapper">
+  <div class="card-product-like">
+    <img src="assets/icons/like.svg" alt="like">
+  </div>
+  <div class="card-product-container-img">
+    <img  class="card-product-img" [src]="data.imageUrls[0]"  alt="img-card-product">
+  </div>
+<!--  <div class="card-product-name">-->
+<!--    <span></span>-->
+<!--  </div>-->
+  <section class="card-product-params">
+    <p>{{data.name}}</p>
+    <p>{{data.currentPrice}}</p>
+  </section>
+</section>
+<ng-template #elseBlock>
+  csdcsdcsdcs
+</ng-template>

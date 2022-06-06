@@ -1,0 +1,173 @@
+@import '@animated-burgers/burger-squeeze/dist/styles.css';
+@import "src/app/app.component";
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  top: 0;
+    padding: 25px 150px;
+  //position: fixed;
+  z-index: 1000;
+  @media (max-width: 1300px) {
+    padding: 25px 100px;
+  }
+  @media (max-width: 1100px) {
+    padding: 25px 40px;
+  }
+  @media (max-width: 930px) {
+    border-bottom: 1px solid $basicColor2;
+  }
+  @media (max-width: 450px) {
+    padding: 25px 15px;
+  }
+}
+.header-active-wrapper{
+  position: fixed;
+  background-color: #3D3D3D7F;
+}
+.header-item-dop{
+  display: none;
+}
+.header-logo{
+  text-align: center;
+}
+.header-item-li{
+  display: none;
+}
+.header-left-item-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  & li{
+    list-style-type: none;
+  }
+  & .header-item{
+    @include basic-font-style;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  @media (max-width: 930px) {
+    & li{
+      width: 100%;
+      padding: 20px 0;
+    }
+  }
+}
+.header-right-item-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  @media (max-width: 450px) {
+    gap: 20px;
+  }
+}
+.header-right-item-img{
+  cursor: pointer;
+}
+.header-humburgeMenu{
+  display: none;
+}
+.hamburger{
+  display: none;
+  cursor: pointer;
+}
+.header-input{
+  display: none;
+}
+.bar{
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background-color: $basicColor2;
+}
+@media (max-width: 1100px) {
+  .header-logo {
+    & img {
+      width: 150px;
+    }
+  }
+}
+@media(max-width:930px){
+  .navigation-wrapper {
+    padding: 25px 50px;
+    grid-template-columns: 30%;
+  }
+  .header-logo{
+    & img{
+      width: 120px;
+    }
+  }
+  .header-right-item-container{
+    & img:nth-child(1){
+      display: none;
+    }
+    & img:nth-child(2){
+      display: none;
+    }
+  }
+  .header-left-item-container{
+    position: fixed;
+    left: -100%;
+    top: 80px;
+    gap: 0;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 0 50px;
+    justify-content: revert;
+  }
+  .header-humburgeMenu{
+    display: block;
+  }
+  .hamburger{
+    display: block;
+  }
+  .hamburger.active .bar:nth-child(2){
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .header-input{
+    display: block;
+  }
+  .header-item-dop{
+    @include basic-font-style;
+    display: block;
+    color: $basicColor;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  .header-item-li{
+    display: block;
+  }
+  .header-left-item-container{
+    & .header-item{
+      @include basic-font-style;
+      font-size: 20px;
+      color: $basicColor;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .header-right-item-container{
+    & img{
+      width: 25px;
+    }
+  }
+}
+.active-list{
+  left: 0;
+  height: 100vh;
+}

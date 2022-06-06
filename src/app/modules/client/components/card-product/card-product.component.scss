@@ -1,0 +1,56 @@
+@import "src/app/app.component";
+.card-product-img{
+  width: 100%;
+  //max-width: 310px;
+  height: 370px;
+  //max-height: 450px;
+}
+.card-product-wrapper{
+  cursor: pointer;
+  //max-width: 310px;
+  max-height: 450px;
+  position: relative;
+  overflow: hidden;
+  &:hover{
+    //.card-product-name{
+    //  bottom: 0;
+    //}
+    .card-product-like{
+      right: 0;
+      transition: all .2s ease-in-out;
+    }
+  }
+}
+.card-product-like{
+  position: absolute;
+  padding: 10px;
+  background-color: $basicColor2;
+  border-bottom-left-radius: 50%;
+  right: -110px;
+  transition: all .2s ease-in-out;
+}
+.card-product-params{
+  text-align: center;
+  & p{
+    margin: 0;
+    @include basic-font-style;
+    font-size: 16px;
+  }
+}
+//.card-product-name{
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  transition: all .2s ease-in-out;
+//  width: 100%;
+//  position: absolute;
+//  bottom: -40px;
+//  background-color: $basicColor2;
+//  height: 40px;
+//  color: white;
+//}
+.card-product-container-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

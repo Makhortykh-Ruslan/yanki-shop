@@ -1,0 +1,29 @@
+@import "src/app/app.component";
+
+.categories-list-item{
+  @include basic-font-style;
+  padding: 10px 0;
+  font-size: $fontSizeBasic;
+  cursor: pointer;
+  list-style-type: none;
+}
+.categories-name{
+  @include basic-font-style;
+  font-size: $fontSizeTitle;
+}
+//.mat-content{
+//  margin: 0 23px 0 0 ;
+//}
+.categories-list-mobile{
+  display: none;
+}
+.categories-list-desktop{
+}
+@media (max-width: 930px) {
+  .categories-list-mobile{
+    display: block;
+  }
+  .categories-list-desktop{
+    display: none;
+  }
+}

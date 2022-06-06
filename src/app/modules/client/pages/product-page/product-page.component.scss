@@ -1,0 +1,99 @@
+@import "src/app/app.component";
+.product-page-wrapper{
+  padding: 40px 0;
+}
+.product-page-content{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 50px;
+}
+.product-img-items-container{
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  transition: all 0.5s ease-out;
+  & img{
+    width: 100%;
+    height: 100%;
+  }
+  &:hover{
+    box-shadow: 1px 4px 5px $basicColor2;
+    transform: translateY(-2px);
+  }
+}
+.product-page-content-left{
+  display: flex;
+  gap: 10px;
+}
+.product-img-title-container{
+  transition: all 0.5s ease-out;
+  & img{
+    width: 100%;
+    height: 100%;
+  }
+  &:hover{
+    box-shadow: 1px 4px 5px $basicColor2;
+    transform: translateY(-2px);
+  }
+}
+.product-img-items{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-page-content-right{
+  width: 100%;
+  & .product-page-name{
+    @include basic-font-style;
+    font-size: 20px;
+  }
+  & .product-page-price{
+    @include basic-font-style;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  & .product-page-color{
+    @include basic-font-style;
+    font-size: 14px;
+  }
+  & .product-page-buttons{
+    display: flex;
+    gap: 20px;
+    & button{
+      width: 100%;
+    }
+    & button:nth-child(1){
+      background-color: $basicColor2;
+      border-radius: 0;
+      @include basic-font-style;
+      color: white;
+    }
+    & button:nth-child(2){
+      border: 1px solid $basicColor;
+      border-radius: 0;
+      @include basic-font-style;
+    }
+  }
+  & .product-page-description{
+    padding: 20px 0 0 0;
+  }
+}
+@media (max-width: 580px) {
+  .product-page-content-left{
+    flex-direction: column-reverse;
+    & .product-img-items{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  }
+  .product-page-content{
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    @media (max-width: 400px) {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+  .product-img-items-container{
+    width: revert;
+    height: revert;
+  }
+}

@@ -1,0 +1,44 @@
+<section class="product-page-wrapper">
+  <section class="product-page-content">
+    <div class="product-page-content-left">
+      <section class="product-img-items">
+        <div class="product-img-items-container" *ngFor="let img of imagesProduct">
+          <img (click)="imagesChange(img)" [src]="img" alt="product">
+        </div>
+      </section>
+      <section class="product-img-title">
+        <div class="product-img-title-container">
+          <img [src]="imageTitle" alt="">
+        </div>
+      </section>
+    </div>
+    <div class="product-page-content-right">
+      <p class="product-page-name">{{dataProduct?.name}}</p>
+      <p class="product-page-price">{{dataProduct?.currentPrice}}</p>
+      <p class="product-page-color">{{dataProduct?.color}}</p>
+      <section class="product-page-select-size">
+        <mat-form-field class="filter-desktop"  appearance="outline">
+          <mat-label>Размер</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let size of sizes" [value]="size" >{{size}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="product-page-buttons">
+        <button mat-button>в корзину</button>
+        <button mat-button>в избранное</button>
+      </section>
+      <section class="product-page-description">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Описание</mat-panel-title>
+            </mat-expansion-panel-header>
+            {{dataProduct?.composition}}
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+
+    </div>
+  </section>
+</section>

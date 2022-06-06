@@ -1,0 +1,12 @@
+<div class="auth-container">
+  <span class="log-in-close" >
+  <img mat-dialog-close src="assets/icons/icon-close.svg" alt="close">
+    <span (click)="stateTabs = !stateTabs" *ngIf="!stateTabs">
+      <span>Назад</span>
+    </span>
+</span>
+  <app-authorization *ngIf="stateTabs; else elseBlock" (toggle)="onChangeTabs($event)"></app-authorization>
+  <ng-template #elseBlock>
+    <app-registration></app-registration>
+  </ng-template>
+</div>

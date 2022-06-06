@@ -1,0 +1,10 @@
+.carousel-indicators{
+  display: none;
+}
+.carousel-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.carousel-inner{
+  height: 700px;
+}

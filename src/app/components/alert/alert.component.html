@@ -1,0 +1,14 @@
+<div class="alert-wrapper">
+  <div  class="alert-close ">
+    <img  mat-dialog-close class="alert-close-item" src="assets/icons/icon-close.svg" alt="close">
+  </div>
+  <section class="alert-success-custom alert-padding" *ngIf="textAlert?.title; else elseBlock">
+    <p>{{textAlert.title}}</p>
+    <p>{{textAlert.text}}</p>
+  </section>
+  <ng-template #elseBlock>
+    <div class="alert-content alert-padding">
+      <p class="alert-text">{{data}}</p>
+    </div>
+  </ng-template>
+</div>

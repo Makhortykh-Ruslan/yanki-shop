@@ -1,0 +1,34 @@
+@import "src/app/app.component";
+.client-private-wrapper{
+  //padding: 25px 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $basicColor;
+  border-top: 1px solid $basicColor;
+  & .client-private-item{
+    cursor: pointer;
+    @include basic-font-style;
+    font-size: 16px;
+    padding: 30px 40px;
+    list-style-type: none;
+    margin: 0;
+    text-transform: uppercase;
+    transition: all 0.4s ease-out;
+  }
+  & .active{
+    transition: all 0.4s ease-out;
+    color: white;
+    background-color: $basicColor2;
+  }
+}
+@media (max-width: 667px) {
+  .client-private-wrapper{
+    flex-direction: column;
+    //padding: 10px 0;
+    & .client-private-item{
+      padding: 10px;
+    }
+  }
+}

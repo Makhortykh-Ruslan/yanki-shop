@@ -1,0 +1,44 @@
+<section>
+  <span class="client-form-name">Персональные данные</span>
+  <form [formGroup]="formCustomer"  action="">
+ <section  class="client-form-container">
+   <mat-form-field class="example-full-width" appearance="outline">
+     <mat-label>Имя</mat-label>
+     <input formControlName="firstName" matInput placeholder="Имя">
+   </mat-form-field>
+
+   <mat-form-field class="example-full-width" appearance="outline">
+     <mat-label>Фамилия</mat-label>
+     <input formControlName="lastName" matInput placeholder="Фамилия">
+   </mat-form-field>
+
+   <mat-form-field class="example-full-width" appearance="outline">
+     <mat-label>Логин</mat-label>
+     <input formControlName="login" matInput placeholder="Логин">
+   </mat-form-field>
+
+   <mat-form-field class="example-full-width" appearance="outline">
+     <mat-label>email</mat-label>
+     <input formControlName="email" matInput placeholder="email">
+   </mat-form-field>
+
+   <mat-form-field class="example-full-width" appearance="outline">
+     <mat-label>Телефон</mat-label>
+     <input formControlName="telephone" matInput placeholder="Телефон">
+   </mat-form-field>
+
+ </section>
+
+<!--    <mat-form-field class="example-full-width" appearance="outline">-->
+<!--      <mat-label>Favorite food</mat-label>-->
+<!--      <input matInput placeholder="Ex. Pizza" value="Sushi">-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field class="example-full-width" appearance="outline">-->
+<!--      <mat-label>Favorite food</mat-label>-->
+<!--      <input matInput placeholder="Ex. Pizza" value="Sushi">-->
+<!--    </mat-form-field>-->
+
+    <button>Обновить информацию</button>
+  </form>
+</section>

@@ -1,0 +1,14 @@
+<section class="carousel-container">
+  <ngb-carousel  *ngFor="let imageItem of dataImages; index as i"
+                [showNavigationArrows]="false"
+                #carousel [interval]="imageItem.interval"
+                [pauseOnHover]="pauseOnHover"
+                [pauseOnFocus]="pauseOnFocus"
+                (slide)="onSlide($event)">
+    <ng-template  ngbSlide *ngFor="let img of imageItem.images; index as j">
+      <div class="picsum-img-wrapper">
+        <img style="width: 100%" [src]="img" alt="My image {{j + 1}} description">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</section>

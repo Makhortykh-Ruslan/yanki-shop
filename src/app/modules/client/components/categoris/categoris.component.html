@@ -1,0 +1,16 @@
+<section>
+<!--  <span class="categories-name">Каталог</span>-->
+  <mat-accordion class="categories-list-mobile">
+    <mat-expansion-panel  [(expanded)]="panelState">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{nameChoose}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="categories-list">
+        <li  (click)="onChangeCatalog(category)" class="categories-list-item" *ngFor="let category of categories">{{category.name}}</li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <ul class="categories-list-desktop">
+    <li  (click)="onChangeCatalog(category)" class="categories-list-item" *ngFor="let category of categories">{{category.name}}</li>
+  </ul>
+</section>

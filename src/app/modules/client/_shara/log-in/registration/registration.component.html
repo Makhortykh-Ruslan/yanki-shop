@@ -1,0 +1,51 @@
+<form action="" [formGroup]="formRegistration" (ngSubmit)="onSubmit()">
+
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Имя</mat-label>
+    <input formControlName="firstName" matInput placeholder="Имя" >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Фамилия</mat-label>
+    <input formControlName="lastName" matInput placeholder="Фамилия" >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Логин</mat-label>
+    <input formControlName="login" matInput placeholder="Логин" >
+  </mat-form-field>
+
+  <mat-form-field  class="example-full-width authorization-input" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input formControlName="email" type="email" matInput placeholder="Ваш E-mail*">
+    <mat-error *ngIf="formRegistration.get('email')?.errors?.required">
+      Пожалуйста введите Ваш Email
+    </mat-error>
+    <mat-error *ngIf="formRegistration.get('email')?.errors?.email">
+      Введите коректный email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width authorization-input" appearance="outline">
+    <mat-label>Пароль</mat-label>
+    <input formControlName="password" type="password" matInput placeholder="Придумайте пароль не меньше 7 символов">
+    <mat-error *ngIf="formRegistration.get('password')?.errors?.required">
+      Введите Ваш пароль
+    </mat-error>
+    <mat-error *ngIf="formRegistration.get('password')?.errors?.formRegistration">
+      Пароль должен быть не меньше {{formRegistration.get('password')?.errors?.minlength?.requiredLength}}
+      Ваш пароль: {{formRegistration.get('password')?.errors?.minlength?.actualLength}}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Телефон</mat-label>
+    <input formControlName="telephone" matInput placeholder="Номер телефона" >
+  </mat-form-field>
+
+  <button
+    [ngClass]="{'button-submit-valid': !formRegistration.invalid, 'button-submit-disabled': formRegistration.invalid}"
+    [disabled]="formRegistration.invalid || submitted"
+    type="submit"
+    class="button-submit">{{!formRegistration.invalid || submitted ? "Зарегистрироваться" : "Необходимо заполнить все поля"}}</button>
+</form>

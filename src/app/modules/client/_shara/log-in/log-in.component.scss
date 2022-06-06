@@ -1,0 +1,25 @@
+@import "src/app/app.component";
+.mat-dialog-container{
+  border-radius: revert;
+  width: 600px;
+}
+.log-in-close{
+  padding: 0 0 30px 0;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.32);
+}
+.auth-container{
+  padding: 24px;
+  @media (max-width: 425px) {
+    padding: 14px;
+  }
+}
+.log-in-close{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}

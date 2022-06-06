@@ -1,0 +1,29 @@
+<div [ngClass]="{'header-active-wrapper' : toggle}" class="header-container">
+  <div (click)="toggle = !toggle" id="menu-toggle" [ngClass]="{'active' : toggle}" class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+  <ul [ngClass]="{'active-list': toggle}" class="header-left-item-container navigation-item">
+<!--    <input class="header-input" type="text">-->
+    <li class="header-item-li">
+      <span (click)="openDialog({logIn: true, mobile: true})" class="header-item-dop" >Личный кабинет</span>
+    </li>
+    <li  *ngFor="let element of navigateLinks">
+      <a (click)="onNavigation()" [routerLink]="element.link" class="header-item" href="#">{{element.name}}</a>
+    </li>
+    <li class="header-item-li">
+      <a class="header-item-dop" href="#">условия возврата</a>
+    </li>
+    <li class="header-item-li">
+      <a class="header-item-dop" href="#">контакты</a>
+    </li>
+  </ul>
+  <span class="header-logo navigation-item">
+      <img src="assets/images/YANKI.svg" alt="">
+    </span>
+  <div class="header-right-item-container navigation-item" >
+    <img src="assets/icons/icon-search.svg" alt="">
+    <img class="header-right-item-img" *ngFor="let icon of navigateIcons" (click)="openDialog(icon)"  [routerLink]="icon.link"  [src]="icon.iconLink" [alt]="icon.name">
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<span class="authorization-title">
+  <h3>Авторизация</h3>
+</span>
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="example-form authorization-container-form">
+  <mat-form-field  class="example-full-width authorization-input" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input formControlName="loginOrEmail" type="email" matInput placeholder="Ваш E-mail*">
+        <mat-error *ngIf="authForm.get('loginOrEmail')?.errors?.required">
+          Пожалуйста введите Ваш Email
+        </mat-error>
+        <mat-error *ngIf="authForm.get('loginOrEmail')?.errors?.email">
+          Введите коректный email
+        </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width authorization-input" appearance="outline">
+    <mat-label>Пароль</mat-label>
+    <input formControlName="password" type="password" matInput placeholder="Ваш пароль">
+        <mat-error *ngIf="authForm.get('password')?.errors?.required">
+          Введите Ваш пароль
+        </mat-error>
+        <mat-error *ngIf="authForm.get('password')?.errors?.minlength">
+          Пароль должен быть не меньше {{authForm.get('password')?.errors?.minlength?.requiredLength}}
+          Ваш пароль: {{authForm.get('password')?.errors?.minlength?.actualLength}}
+        </mat-error>
+  </mat-form-field>
+  <div class="authorization-footer-info">
+    <span>Забыли пароль</span>
+    <span (click)="onShowRegistration()">Нет аккаунт ?</span>
+  </div>
+  <button [ngClass]="{'button-submit-valid': !authForm.invalid, 'button-submit-disabled': authForm.invalid}" [disabled]="authForm.invalid || submitted" type="submit" class="button-submit">войти</button>
+</form>
+

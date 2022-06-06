@@ -1,0 +1,46 @@
+<footer class="footer-wrapper">
+  <section class="footer-section" *ngFor="let footerTitle of footerSettings">
+    <p class="footer-section-title">{{footerTitle.name}}</p>
+      <ul class="footer-section-list">
+        <li class="footer-section-list-item" *ngFor="let item of footerTitle.list" >
+          <a class="footer-section-list-item-link" href="#">{{item.nameAndLinkRouter}}</a>
+        </li>
+      </ul>
+  </section>
+  <section class="accordion-wrapper">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let footerTitle of footerSettings" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{footerTitle.name}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="footer-section-list">
+          <li class="footer-section-list-item" *ngFor="let item of footerTitle.list" >
+            <a class="footer-section-list-item-link" href="#">{{item.nameAndLinkRouter}}</a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+  <section class="footer-section footer-section-contact">
+    <p class="footer-section-title">контакты</p>
+    <div class="footer-section-icons">
+      <img class="footer-section-icon" src="assets/icons/icon-instagram.svg" alt="">
+      <img class="footer-section-icon" src="assets/icons/icon-telegram.svg" alt="">
+    </div>
+    <ul class="footer-section-list">
+      <li class="footer-section-list-item">
+        <a class="footer-section-list-item-link" href="#">0994752098</a>
+      </li>
+    </ul>
+    <ul class="footer-section-list">
+      <li class="footer-section-list-item">
+        <a class="footer-section-list-item-link" href="#">makhortykh.ruslan@gmail.com</a>
+      </li>
+    </ul>
+  </section>
+</footer>
+<section class="footer-info">
+  <span>©️ 2022 Yanki. All rights reserved</span>
+  <span>(by developer Makortykh Ruslan)</span>
+</section>
+

@@ -1,0 +1,12 @@
+.cdk-overlay-dark-backdrop {
+  background: rgba(255, 255, 255, 0.7);
+}
+.mat-dialog-container{
+  box-shadow: revert;
+}
+.home-page-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
