@@ -1,9 +1,13 @@
 <div class="wrapper-product-line">
+
   <div class="product-line-tem">
     <img class="img-product" [src]="productData?.product?.imageUrls[0]" alt="">
     <div class="art-name">
       <p>art: {{productData?.product?.itemNo}}</p>
       <p>{{productData?.product?.name}}</p>
+      <div class="color-dop">
+        color
+      </div>
     </div>
   </div>
 
@@ -26,5 +30,8 @@
 
   <div class="product-line-tem">{{productData?.product?.currentPrice}} грн.</div>
 
-  <div (click)="onDeletedProductFromCart(productData?.product._id)" class="product-line-tem">deleted</div>
+  <div (click)="onDeletedProductFromCart(productData?.product._id)" class="product-line-tem">
+    <img src="assets/icons/icon-clear.svg" alt="clear">
+  </div>
+
 </div>

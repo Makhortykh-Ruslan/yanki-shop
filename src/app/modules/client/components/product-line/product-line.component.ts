@@ -15,7 +15,6 @@ export class ProductLineComponent implements OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    console.log('hello product line', this.productData)
   }
 
   onDecreaseProductQuantity(_id: string) {

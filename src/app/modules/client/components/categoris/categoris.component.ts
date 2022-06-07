@@ -1,8 +1,7 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NotificationsService} from '../../../../services/notifications.service';
 import {ProductsService} from '../../../../services/products.service';
 import {Catalog} from '../../../../interfaces/products-interface';
-import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-categoris',
@@ -21,19 +20,11 @@ export class CategorisComponent implements OnInit {
       ) { }
 
   ngOnInit(): void {
-    console.log('hello categories')
     this.onGetCategories();
   }
   onGetCategories(): void{
-
     this.productsService.getCategories().subscribe(res => {
       this.categories = res;
-      console.log('hello', res)
-
-    }, error => {
-      // this.notificationsService.notificationPreloader(false);
-    }, () => {
-      // this.notificationsService.notificationPreloader(false);
     });
   }
 

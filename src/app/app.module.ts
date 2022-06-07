@@ -49,6 +49,7 @@ import { ClientPrivateDataPrivateComponent } from './modules/client/pages/client
 import {PreloaderInterceptor} from './Interceptor/preloader.interceptor';
 import { CartPageComponent } from './modules/client/pages/cart-page/cart-page.component';
 import { ProductLineComponent } from './modules/client/components/product-line/product-line.component';
+import { OrderComponent } from './modules/client/components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ProductLineComponent } from './modules/client/components/product-line/p
     ClientPrivateOrdersComponent,
     ClientPrivateDataPrivateComponent,
     CartPageComponent,
-    ProductLineComponent
+    ProductLineComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,6 @@ export class NavigationPanelComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(window.innerWidth)
   }
   openDialog(value: any): void {
     const isToken = this.authService.getToken;
