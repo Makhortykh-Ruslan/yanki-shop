@@ -1,1 +1,10 @@
-<p>cart-page works!</p>
+<section>
+  <h3 class="cart-page-header">Ваш заказ:</h3>
+
+  <section *ngFor="let product of productInsideCartArr">
+    <app-product-line  [productData]="product"></app-product-line>
+  </section>
+
+  <div class="cart-page-footer">К оплате: <strong>{{generalSumCalculation()}}</strong></div>
+
+</section>

@@ -1,0 +1,9 @@
+@import "src/app/app.component";
+.cart-page-header{
+  @include basic-font-style;
+  font-size: 19px;
+}
+.cart-page-footer{
+  padding: 20px 0 0 0;
+  text-align: end;
+}

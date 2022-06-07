@@ -23,8 +23,8 @@ export class CartService {
 
   addProduct(product: AddProduct): void{
     const copyCartStore = this.cartStore$.getValue();
-    const result  = copyCartStore.find(elem => elem.product.itemNo === product.product.itemNo);
-    if(result){
+    const hasProduct  = copyCartStore.find(elem => elem.product.itemNo === product.product.itemNo);
+    if(hasProduct){
       const idx = copyCartStore.findIndex(elem => elem.product.itemNo === product.product.itemNo);
       copyCartStore[idx].cartQuantity++
       this.cartStore$.next(copyCartStore);

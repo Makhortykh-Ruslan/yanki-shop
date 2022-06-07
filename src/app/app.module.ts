@@ -48,6 +48,7 @@ import { ClientPrivateOrdersComponent } from './modules/client/pages/client-priv
 import { ClientPrivateDataPrivateComponent } from './modules/client/pages/client-private-data-private/client-private-data-private.component';
 import {PreloaderInterceptor} from './Interceptor/preloader.interceptor';
 import { CartPageComponent } from './modules/client/pages/cart-page/cart-page.component';
+import { ProductLineComponent } from './modules/client/components/product-line/product-line.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { CartPageComponent } from './modules/client/pages/cart-page/cart-page.co
     HumburgerMenuComponent,
     ClientPrivateOrdersComponent,
     ClientPrivateDataPrivateComponent,
-    CartPageComponent
+    CartPageComponent,
+    ProductLineComponent
   ],
   imports: [
     BrowserModule,

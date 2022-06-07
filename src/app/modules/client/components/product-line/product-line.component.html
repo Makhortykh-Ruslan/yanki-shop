@@ -1,0 +1,28 @@
+<div class="wrapper-product-line">
+  <div class="product-line-tem">
+    <img class="img-product" [src]="productData?.product?.imageUrls[0]" alt="">
+    <div class="art-name">
+      <p>art: {{productData?.product?.itemNo}}</p>
+      <p>{{productData?.product?.name}}</p>
+    </div>
+  </div>
+  <div>
+    color
+  </div>
+  <mat-form-field  appearance="outline">
+<!--    <mat-label>{{size}}</mat-label>-->
+    <mat-select>
+      <mat-option  *ngFor="let size of sizes" [value]="size" >{{size}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <span>-</span>
+    <div>{{productData?.cartQuantity}}</div>
+    <span>+</span>
+  </div>
+
+  <div>{{productData?.product?.currentPrice}} грн.</div>
+
+  <div>deleted</div>
+</div>

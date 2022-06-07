@@ -1,0 +1,27 @@
+@import "src/app/app.component";
+.wrapper-product-line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid black;
+  & mat-form-field{
+    width: 100px;
+    & .mat-form-field-wrapper{
+      padding-bottom: 0;
+    }
+  }
+  & .product-line-tem:nth-child(1){
+    display: flex;
+    width: 400px;
+  }
+}
+.img-product{
+  width: 95px;
+  height: 110px;
+}
+.art-name{
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 10px;
+}
