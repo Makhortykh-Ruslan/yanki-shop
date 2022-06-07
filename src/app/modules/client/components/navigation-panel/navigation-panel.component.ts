@@ -4,6 +4,7 @@ import {LogInComponent} from '../../_shara/log-in/log-in.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../../../services/auth.service';
 import {Router} from '@angular/router';
+import {NoopScrollStrategy} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-navigation-panel',
@@ -29,6 +30,7 @@ export class NavigationPanelComponent implements OnInit {
       if (value.logIn) { this.dialog.open(LogInComponent, {
         // height: window.innerWidth < 450 ? '100vh' : 'revert',
         maxWidth: window.innerWidth < 450 ? '90vw' : '80vw',
+        scrollStrategy: new NoopScrollStrategy()
       }); }
       if (value.mobile) { this.toggle = false; }
     }

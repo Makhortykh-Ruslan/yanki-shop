@@ -4,6 +4,7 @@ import {AddProduct, Product} from '../interfaces/products-interface';
 import {ProductsService} from './products.service';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class CartService {
 
   constructor(
       private productsService: ProductsService,
-      private http: HttpClient
+      private http: HttpClient,
+      private authService: AuthService
   ) { }
 
   getAllProducts(): string | null{
@@ -32,8 +34,9 @@ export class CartService {
       this.cartStore$.next([...copyCartStore, product])
     }
   }
-  deletedProduct(id: string | number): void{
 
+  updateLocalCartStore(data: any){
+    this.cartStore$.next(data);
   }
 
   createCartDB(){
@@ -43,15 +46,89 @@ export class CartService {
     }
     return this.http.post(`${environment.api}/cart`, newCart)
   }
+
   addProductOnCartDB(id: string| undefined){
     return this.http.put(`${environment.api}/cart/${id}`, null)
-
   }
+
   getCartDB(){
     return this.http.get(`${environment.api}/cart`).subscribe(res => {
       // @ts-ignore
       const result = res['products'];
       this.cartStore$.next(result)
     })
+  }
+  decreaseProductQuantity(id: string){
+    return this.http.delete(`${environment.api}/cart/product/${id}`)
+  }
+
+  deletedProduct(id: string | number){
+    return this.http.delete(`${environment.api}/cart/${id}`)
+  }
+
+  addProductToCart(id: string){
+    if(this.authService.getToken){
+      this.addProductOnCartDB(id).subscribe(res => {
+        // @ts-ignore
+        this.updateLocalCartStore(res['products'])
+      })
+    }else {
+      this.incrementOrDecrement('increment', id);
+    }
+
+  }
+  localDecreaseProductQuantity(_id: string){
+
+    if(this.authService.getToken){
+      this.decreaseProductQuantity(_id).subscribe(res => {
+        // @ts-ignore
+        this.updateLocalCartStore(res['products'])
+      })
+    }else {
+      this.incrementOrDecrement('decrement', _id)
+    }
+  }
+  localDeletedProductFromCart(_id: string){
+    if (this.authService.getToken){
+      this.deletedProduct(_id).subscribe(res => {
+        // @ts-ignore
+        this.updateLocalCartStore(res['products'])
+      })
+    }else {
+      this.localDeletedProduct(_id);
+    }
+  }
+
+  incrementOrDecrement(type: string, _id: string){
+    const copyCartStore = this.cartStore$.getValue();
+    const hasProduct  = copyCartStore.find(elem => elem.product._id === _id);
+    if(hasProduct){
+      const idx = copyCartStore.findIndex(elem => elem.product._id === _id);
+
+      if(copyCartStore[idx].cartQuantity === 1 && type === 'decrement'){
+        copyCartStore.splice(idx, 1);
+        this.cartStore$.next(copyCartStore);
+        return
+      }
+
+      if(type === 'increment'){
+        copyCartStore[idx].cartQuantity++
+      }
+      if(type === 'decrement'){
+        copyCartStore[idx].cartQuantity--
+      }
+
+      this.cartStore$.next(copyCartStore);
+    }
+  }
+
+  localDeletedProduct(_id: string){
+    const copyCartStore = this.cartStore$.getValue();
+    const hasProduct  = copyCartStore.find(elem => elem.product._id === _id);
+    if(hasProduct){
+      const idx = copyCartStore.findIndex(elem => elem.product._id === _id);
+      copyCartStore.splice(idx, 1);
+      this.cartStore$.next(copyCartStore);
+    }
   }
 }

@@ -14,6 +14,7 @@ import {AuthService} from './services/auth.service';
 import {CartService} from './services/cart.service';
 import {ProductsService} from './services/products.service';
 import {Subscriber, Subscription} from 'rxjs';
+import {NoopScrollStrategy} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +54,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
         data,
         position: {top: '0'},
         maxWidth: '500px',
+        scrollStrategy: new NoopScrollStrategy(),
       });
       const timer = setTimeout(() => {
         dialogRef.close(AlertComponent);

@@ -4,8 +4,9 @@
       <router-outlet></router-outlet>
     </div>
   <app-footer></app-footer>
+  <app-preloader *ngIf="notificationsService.preloader$ | async" class="preloader-container"></app-preloader>
+<!--  <section >-->
+<!--    <app-preloader class="preloader-container"></app-preloader>-->
+<!--  </section>-->
 </div>
-<section *ngIf="notificationsService.preloader$ | async">
-  <app-preloader class="preloader-container"></app-preloader>
-</section>
 

@@ -6,23 +6,25 @@
       <p>{{productData?.product?.name}}</p>
     </div>
   </div>
-  <div>
+
+  <div class="product-line-tem">
     color
   </div>
-  <mat-form-field  appearance="outline">
+
+  <mat-form-field  class="product-line-tem" appearance="outline">
 <!--    <mat-label>{{size}}</mat-label>-->
     <mat-select>
       <mat-option  *ngFor="let size of sizes" [value]="size" >{{size}}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div>
-    <span>-</span>
+  <div class="product-line-tem">
+    <span (click)="onDecreaseProductQuantity(productData?.product._id)" >-</span>
     <div>{{productData?.cartQuantity}}</div>
-    <span>+</span>
+    <span (click)="onAddProductQuantity(productData?.product._id)">+</span>
   </div>
 
-  <div>{{productData?.product?.currentPrice}} грн.</div>
+  <div class="product-line-tem">{{productData?.product?.currentPrice}} грн.</div>
 
-  <div>deleted</div>
+  <div (click)="onDeletedProductFromCart(productData?.product._id)" class="product-line-tem">deleted</div>
 </div>

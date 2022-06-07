@@ -4,6 +4,7 @@
   font-size: 19px;
 }
 .cart-page-footer{
+  @include basic-font-style;
   padding: 20px 0 0 0;
   text-align: end;
 }

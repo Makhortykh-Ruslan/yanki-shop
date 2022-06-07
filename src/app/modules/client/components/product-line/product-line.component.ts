@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {AddProduct} from '../../../../interfaces/products-interface';
+import {CartService} from '../../../../services/cart.service';
 
 @Component({
   selector: 'app-product-line',
@@ -11,10 +12,20 @@ export class ProductLineComponent implements OnInit {
   sizes = ['s','m','l']
   sizeT = 's'
   @Input() productData: AddProduct | undefined;
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
     console.log('hello product line', this.productData)
   }
 
+  onDecreaseProductQuantity(_id: string) {
+    this.cartService.localDecreaseProductQuantity(_id);
+  }
+
+  onDeletedProductFromCart(_id: string) {
+    this.cartService.localDeletedProductFromCart(_id);
+  }
+  onAddProductQuantity(_id: string){
+    this.cartService.addProductToCart(_id);
+  }
 }
