@@ -3,7 +3,7 @@ import {ProductsService} from '../../../../services/products.service';
 import {NotificationsService} from '../../../../services/notifications.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {Product} from '../../../../interfaces/products-interface';
+import {AddProduct, Product} from '../../../../interfaces/products-interface';
 import {CartService} from '../../../../services/cart.service';
 import {logger} from 'codelyzer/util/logger';
 import {AuthService} from '../../../../services/auth.service';
@@ -61,7 +61,11 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   onAddToCartProduct() {
     if(!this.authService.getToken){
-      this.cartService.addProduct(this.getOneProduct);
+      const product: AddProduct = {
+        cartQuantity: 1,
+        product: this.getOneProduct
+      }
+      this.cartService.addProduct(product);
       this.notificationsService.notificationDialogSuccess(`${this.getOneProduct?.name}, добавлено в корзину!`)
     }else {
       this.cartService.addProductOnCartDB(this.getOneProduct?._id).subscribe(res => {

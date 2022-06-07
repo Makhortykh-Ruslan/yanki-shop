@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Product} from '../interfaces/products-interface';
+import {AddProduct, Product} from '../interfaces/products-interface';
 import {ProductsService} from './products.service';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -21,9 +21,16 @@ export class CartService {
     return JSON.parse(sessionStorage.getItem('allProducts') || '{}');
   }
 
-  addProduct(product: any): void{
+  addProduct(product: AddProduct): void{
     const copyCartStore = this.cartStore$.getValue();
-    this.cartStore$.next([...copyCartStore, product])
+    const result  = copyCartStore.find(elem => elem.product.itemNo === product.product.itemNo);
+    if(result){
+      const idx = copyCartStore.findIndex(elem => elem.product.itemNo === product.product.itemNo);
+      copyCartStore[idx].cartQuantity++
+      this.cartStore$.next(copyCartStore);
+    }else {
+      this.cartStore$.next([...copyCartStore, product])
+    }
   }
   deletedProduct(id: string | number): void{
 
@@ -37,8 +44,7 @@ export class CartService {
     return this.http.post(`${environment.api}/cart`, newCart)
   }
   addProductOnCartDB(id: string| undefined){
-    // @ts-ignore
-    return this.http.put(`${environment.api}/cart/${id}`)
+    return this.http.put(`${environment.api}/cart/${id}`, null)
 
   }
   getCartDB(){

@@ -30,7 +30,8 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
       private dialog: MatDialog,
       private authService: AuthService,
       private cdr: ChangeDetectorRef,
-      private productsService: ProductsService
+      private productsService: ProductsService,
+      private cartService: CartService,
   ) {
   }
 
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.notificationsService.notificationSubject.subscribe(data => this.openNotificationDialog(data));
     this.onChangePreloader();
     this.setAllProductStore();
+    this.getCartDBCustomer();
   }
 
   openNotificationDialog(data: any): void{
@@ -66,6 +68,11 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
       this.subProducts$ = this.productsService.getAllProducts().subscribe(res => {
         sessionStorage.setItem('allProducts', JSON.stringify(res));
       })
+    }
+  }
+  getCartDBCustomer(){
+    if(this.authService.getToken){
+      this.cartService.getCartDB();
     }
   }
   ngOnDestroy(): void {

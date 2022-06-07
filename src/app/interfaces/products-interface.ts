@@ -18,6 +18,10 @@ export interface Product {
   date?: string;
   __v?: string;
 }
+export interface AddProduct {
+  cartQuantity: number;
+  product: any;
+}
 export interface Catalog {
   _id: string;
   id: string;
