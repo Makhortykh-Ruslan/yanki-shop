@@ -52,7 +52,18 @@ export class CartService {
   }
 
   getCartDB(){
-    return this.http.get(`${environment.api}/cart`).subscribe(res => {
+    const getToken = this.authService.getToken;
+    const headerDict: any = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Authorization': getToken
+    }
+
+    const requestOptions: any = {
+      headers: new Headers(headerDict),
+    };
+    return this.http.get(`${environment.api}/cart`, requestOptions).subscribe(res => {
       // @ts-ignore
       const result = res['products'];
       this.cartStore$.next(result)

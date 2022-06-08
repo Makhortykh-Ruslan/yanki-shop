@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.notificationsService.notificationSubject.subscribe(data => this.openNotificationDialog(data));
     this.onChangePreloader();
     this.setAllProductStore();
-    this.getCartDBCustomer();
+    // this.getCartDBCustomer();
   }
 
   openNotificationDialog(data: any): void{
