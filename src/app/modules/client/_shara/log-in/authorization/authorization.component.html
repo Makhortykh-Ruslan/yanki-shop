@@ -27,6 +27,10 @@
     <span>Забыли пароль</span>
     <span (click)="onShowRegistration()">Нет аккаунт ?</span>
   </div>
-  <button [ngClass]="{'button-submit-valid': !authForm.invalid, 'button-submit-disabled': authForm.invalid}" [disabled]="authForm.invalid || submitted" type="submit" class="button-submit">войти</button>
+  <button
+    [ngClass]="{'button-submit-valid': !authForm.invalid, 'button-submit-disabled': authForm.invalid}"
+    [disabled]="authForm.invalid || submitted"
+    type="submit"
+    class="button-submit">войти</button>
 </form>
 

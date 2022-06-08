@@ -45,7 +45,7 @@
 
   <button
     [ngClass]="{'button-submit-valid': !formRegistration.invalid, 'button-submit-disabled': formRegistration.invalid}"
-    [disabled]="formRegistration.invalid || submitted"
+    [disabled]="formRegistration.invalid"
     type="submit"
-    class="button-submit">{{!formRegistration.invalid || submitted ? "Зарегистрироваться" : "Необходимо заполнить все поля"}}</button>
+    class="button-submit">Зарегистрироваться</button>
 </form>

@@ -2,6 +2,7 @@
 .filter-desktop{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 30px;
 }
 //mat-panel-title{
 //  font-size: $fontSizeBasic;

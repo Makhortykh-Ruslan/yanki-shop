@@ -5,16 +5,18 @@ import {User} from '../interfaces/auth-interface';
 import {environment} from '../../environments/environment.prod';
 import {tap} from 'rxjs/operators';
 import {CustomerInterface} from '../interfaces/customer-interface';
+import {NotificationsService} from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  error$: Subject<string> = new Subject<string>();
-  success$: Subject<string> = new Subject<string>();
+  // error$: Subject<string> = new Subject<string>();
+  // success$: Subject<string> = new Subject<string>();
 
   constructor(
       private http: HttpClient,
+      private notificationsService: NotificationsService,
       ) { }
 
   get getToken(): string | null{
@@ -52,34 +54,36 @@ export class AuthService {
     const {password, loginOrEmail, telephone, email, message, login} = error.error;
     switch (password || loginOrEmail || telephone || email || message || login){
       case 'INVALID_EMAIL':
-        this.error$.next('Некорректный email');
+        this.notificationsService.notificationDialogError('Некорректный email')
         break;
       case 'Password incorrect':
-        this.error$.next('Неверный пароль');
+        this.notificationsService.notificationDialogError('Неверный пароль')
         break;
       case 'EMAIL_NOT_FOUND':
-        this.error$.next('Нет такого email');
+        this.notificationsService.notificationDialogError('Нет такого email')
         break;
       case 'Customer not found':
-        this.error$.next('Нет такого пользователя');
+        this.notificationsService.notificationDialogError('Нет такого пользователя')
         break;
       case 'That is not a valid phone number.':
-        this.error$.next('Не правильный номер телефона, используйте формат +380999999999');
+        this.notificationsService.notificationDialogError('Не правильный номер телефона, используйте формат +380999999999')
         break;
       case 'That is not a valid email':
-        this.error$.next('Не валидный емайл');
+        this.notificationsService.notificationDialogError('Не валидный email')
         break;
       case 'Allowed characters for login is a-z, A-Z, 0-9.':
-        this.error$.next('Для Логина допустимые символы для входа: a-z, A-Z, 0-9.');
+        this.notificationsService.notificationDialogError('Для Логина допустимые символы для входа: a-z, A-Z, 0-9.')
         break;
       case message:
-        const array = message.split(' ');
+        const array = message.split(' ') ? message.split(' ') :
+            this.notificationsService.notificationDialogError(`${message}`)
+        ;
         const resultEmail = array.includes('Email') ? `Email ${array[1]} уже используется` : '';
         const resultLogin = array.includes('Login') ? `Логин ${array[1]} уже используется` : '';
         const result = resultEmail || resultLogin;
-        this.error$.next(result);
+        this.notificationsService.notificationDialogError(`${result}`)
         break;
-        default : this.error$.next('Неизвестная ошибка спросите у Руслана что произошло makhortykh.ruslan@gmail.com');
+        default : this.notificationsService.notificationDialogError('Неизвестная ошибка, узнайте у разработчика что пошло не так makhortykh.ruslan@gmail.com')
     }
     return throwError(error);
   }

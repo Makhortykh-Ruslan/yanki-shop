@@ -5,7 +5,7 @@
     <h3>Войти в личный кабинет</h3>
   </div>
   <div class="order-form-wrapper">
-    <form class="order-form" action="">
+    <form [formGroup]="orderForm" class="order-form" action="">
 
       <div class="order-form-container">
         <mat-form-field  class="example-full-width" appearance="outline">
@@ -21,14 +21,14 @@
 
       <div class="order-form-container">
         <mat-form-field  class="example-full-width" appearance="outline">
-    <mat-label>Ваш e-mail*</mat-label>
-    <input  type="email" matInput placeholder="Ваш e-mail*">
-  </mat-form-field>
+          <mat-label>Ваш e-mail*</mat-label>
+          <input formControlName="email"  type="email" matInput placeholder="Ваш e-mail*">
+        </mat-form-field>
 
         <mat-form-field  class="example-full-width" appearance="outline">
-    <mat-label>Ваш телефон*</mat-label>
-    <input  type="number" matInput placeholder="Ваш телефон*">
-  </mat-form-field>
+          <mat-label>Ваш телефон*</mat-label>
+          <input formControlName="mobile" type="number" matInput placeholder="Ваш телефон*">
+        </mat-form-field>
       </div>
 
       <h3 class="order-description">Адрес доставки:</h3>
@@ -36,20 +36,37 @@
       <div class="order-form-container">
         <mat-form-field  class="example-full-width" appearance="outline">
           <mat-label>Город*</mat-label>
-          <input  type="text" matInput placeholder="Город*">
+          <input formControlName="city" type="text" matInput placeholder="Город*">
         </mat-form-field>
 
         <mat-form-field  class="example-full-width" appearance="outline">
-          <mat-label>Отделение почты**</mat-label>
-          <input  type="text" matInput placeholder="Отделение почты*">
+          <mat-label>Адрес</mat-label>
+          <input formControlName="address" type="text" matInput placeholder="Адрес*">
+        </mat-form-field>
+
+      </div>
+
+      <div class="order-form-container">
+        <mat-form-field class="filter-desktop"  appearance="outline">
+          <mat-label>Страна</mat-label>
+          <mat-select formControlName="country">
+            <mat-option value="Украина">Украина родная</mat-option>
+            <mat-option value="Польша">Польша</mat-option>
+            <mat-option value="Германия">Германия</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field  class="example-full-width" appearance="outline">
+          <mat-label>Отделение почты*</mat-label>
+          <input formControlName="postal" type="text" matInput placeholder="Отделение почты*">
         </mat-form-field>
       </div>
 
       <h3 class="order-description">Вы можете оплатить покупку одним из ниже перечисленных способов:</h3>
 
-      <mat-radio-group aria-label="Select an option">
-          <mat-radio-button value="1">Денежным переводом  Visa/MasterCard</mat-radio-button>
-          <mat-radio-button value="2">Наличные</mat-radio-button>
+        <mat-radio-group formControlName="paymentInfo" aria-label="Select an option">
+          <mat-radio-button value="Credit card">Денежным переводом  Visa/MasterCard</mat-radio-button>
+          <mat-radio-button value="Cash">Наличные</mat-radio-button>
         </mat-radio-group>
 
 
@@ -63,8 +80,13 @@
         <p>Итого:</p>
         <p>price</p>
       </div>
-
-      <button class="button-submit">ОФОРМИТЬ ЗАКАЗ</button>
+{{orderForm.invalid | json}}
+      <button
+        (click)="onSubmitOrder()"
+        class="button-submit"
+        [ngClass]="{'button-submit-valid': !orderForm.invalid, 'button-submit-disabled': orderForm.invalid}"
+        [disabled]="orderForm.invalid"
+      >ОФОРМИТЬ ЗАКАЗ</button>
 
     </section>
   </div>

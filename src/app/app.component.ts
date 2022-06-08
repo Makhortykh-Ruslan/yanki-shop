@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
   ngOnInit(): void {
-    this.authService.error$.subscribe(error => this.openNotificationDialog(error));
+    // this.authService.error$.subscribe(error => this.openNotificationDialog(error));
     this.notificationsService.notificationSubject.subscribe(data => this.openNotificationDialog(data));
     this.onChangePreloader();
     this.setAllProductStore();
@@ -53,13 +53,13 @@ export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
       const dialogRef = this.dialog.open(AlertComponent, {
         data,
         position: {top: '0'},
-        maxWidth: '500px',
+        // maxWidth: '500px',
         scrollStrategy: new NoopScrollStrategy(),
       });
-      const timer = setTimeout(() => {
-        dialogRef.close(AlertComponent);
-        clearTimeout(timer);
-      }, 2000);
+      // const timer = setTimeout(() => {
+      //   dialogRef.close(AlertComponent);
+      //   clearTimeout(timer);
+      // }, 2000);
     }
   }
   onChangePreloader(): void{

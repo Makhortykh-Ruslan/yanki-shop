@@ -23,6 +23,7 @@ export class AlertComponent implements OnInit {
     this.onGetMessage(this.data);
   }
   onGetMessage(dataAlert: any): void{
+    console.log('hello', this.data)
     const get = {
       registration: {title: 'Регистрация проша успешно!', text: 'Вы успешно зарегестрировались! Приятных покупок!'},
       auth: {title: 'Авторизация прошла успешно!', text: `Приятных покупок ${dataAlert.data?.firstName} ${dataAlert.data?.lastName} )))!`}
