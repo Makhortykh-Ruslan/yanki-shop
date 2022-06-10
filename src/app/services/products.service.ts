@@ -11,7 +11,7 @@ import {environment} from '../../environments/environment';
 export class ProductsService implements ProductService{
 
   private paramsProductForFiltered: ParamsProduct = {
-    size: 's',
+    size: '',
     startPage: '1',
     perPage: '6',
     categories: '',
