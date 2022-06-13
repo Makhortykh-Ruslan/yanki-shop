@@ -1,12 +1,8 @@
-<p>products-page works!</p>
 <section class="products-wrapper">
   <app-categoris class="products-item"></app-categoris>
   <app-filter class="products-item"></app-filter>
   <section *ngIf="dataProducts?.products?.length" class="products-item">
     <app-card-product (click)="onOpenProductPage(elem.itemNo)" [data]="elem" *ngFor="let elem of dataProducts?.products"></app-card-product>
-  </section>
-  <section *ngIf="!dataProducts?.products?.length" class="products-item products-item-dop" #elseBlock>
-    нихрена нет
   </section>
   <app-paginator *ngIf="dataProducts?.products?.length" class="products-item"></app-paginator>
 </section>

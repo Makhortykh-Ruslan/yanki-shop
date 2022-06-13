@@ -148,6 +148,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ul{
   padding-left: 0;
 }
+.mat-progress-spinner, .mat-spinner {
+  circle {
+    stroke: #E0BEA2 !important;
+  }
+
+  &.mat-accent circle {
+    stroke: #E0BEA2 !important;
+  }
+
+  &.mat-warn circle {
+    stroke: #E0BEA2 !important;
+  }
+}
 
 ///* Importing Bootstrap SCSS file. */
 //@import '~bootstrap/scss/bootstrap';

@@ -18,7 +18,8 @@
     display: grid;
     //grid-template-columns: repeat(3, 310px);
     gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    //grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   }
   & .products-item:nth-child(4){
     grid-area: p;
