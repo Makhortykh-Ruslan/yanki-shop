@@ -1,7 +1,7 @@
 @import "src/app/app.component";
 .card-product-img{
-  width: 100%;
-  height: 450px;
+  //width: 100%;
+  //height: 450px;
   //max-width: 310px;
   //height: 370px;
   //max-height: 450px;
@@ -22,6 +22,7 @@
   }
 }
 .card-product-like{
+  z-index: 1001;
   position: absolute;
   padding: 10px;
   background-color: $basicColor2;
@@ -50,7 +51,17 @@
 //  color: white;
 //}
 .card-product-container-img{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  position: relative;
+  padding: 0 0 70% 0;
+  & .card-product-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
