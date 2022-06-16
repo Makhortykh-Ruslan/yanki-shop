@@ -3,5 +3,13 @@ mat-spinner{
   //margin: 0 auto;
   top: 40%;
   left: 46%;
-  margin-right: -50%;
+  //margin-right: -50%;
+  @media (max-width: 400px) {
+    top: 20%;
+    left: 34%;
+  }
+  @media (max-width: 500px) {
+    top: 28%;
+    left: 40%;
+  }
 }

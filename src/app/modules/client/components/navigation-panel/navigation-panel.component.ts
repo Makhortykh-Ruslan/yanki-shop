@@ -19,11 +19,15 @@ export class NavigationPanelComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    console.log('hello', this.navigateIcons)
   }
   openDialog(value: any): void {
     const isToken = this.authService.getToken;
     if (isToken){
-      if (value.mobile) { this.toggle = false; }
+      if (value.mobile) {
+        this.toggle = false;
+        this.router.navigate(['/clientAccount']);
+      }
       this.router.navigate([value.link]);
     }else {
       if (value.logIn) { this.dialog.open(LogInComponent, {

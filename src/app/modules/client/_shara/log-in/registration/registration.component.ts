@@ -28,7 +28,7 @@ export class RegistrationComponent implements OnInit {
       private notificationsService: NotificationsService,
       public authService: AuthService,
       public dialog: MatDialog,
-      private cartService: CartService
+      private cartService: CartService,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +48,10 @@ export class RegistrationComponent implements OnInit {
     this.authService.registration(newCustomer).subscribe(res => {
       this.authService.login(authAfterRegistrations).subscribe(res => {
         this.cartService.createCartDB();
+        //If the client has previously added goods to the cart (locally), we transfer all previously added goods to the cart database
+        if(this.cartService.cartStore$.getValue().length > 0){
+          this.cartService.updateCartDB();
+        }
         this.formRegistration.reset();
         this.dialog.closeAll();
         this.notificationsService.notificationDialogSuccess('registration');

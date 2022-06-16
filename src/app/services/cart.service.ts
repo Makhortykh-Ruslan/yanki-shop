@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {AddProduct, Product} from '../interfaces/products-interface';
 import {ProductsService} from './products.service';
 import {HttpClient} from '@angular/common/http';
@@ -45,6 +45,18 @@ export class CartService {
       cartQuantity: 1
     }
     return this.http.post(`${environment.api}/cart`, newCart)
+  }
+
+  updateCartDB(): Subscription{
+    const copyCartStore = this.cartStore$.getValue();
+    const updateCart: AddProduct[] = [];
+    copyCartStore.map(elem => {
+      updateCart.push({product: elem.product._id, cartQuantity: elem.cartQuantity});
+    });
+    return this.http.put<{id: string, products: Product[]}>(`${environment.api}/cart`, {products: updateCart}).subscribe(res => {
+      const result = res.products;
+      this.cartStore$.next(result)
+    });
   }
 
   addProductOnCartDB(id: string| undefined){
