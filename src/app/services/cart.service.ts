@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {AddProduct, Product} from '../interfaces/products-interface';
 import {ProductsService} from './products.service';
 import {HttpClient} from '@angular/common/http';
@@ -29,13 +29,13 @@ export class CartService {
     if(hasProduct){
       const idx = copyCartStore.findIndex(elem => elem.product.itemNo === product.product.itemNo);
       copyCartStore[idx].cartQuantity++
-      this.cartStore$.next(copyCartStore);
+      this.updateLocalCartStore(copyCartStore);
     }else {
-      this.cartStore$.next([...copyCartStore, product])
+      this.updateLocalCartStore([...copyCartStore, product]);
     }
   }
 
-  updateLocalCartStore(data: any){
+  updateLocalCartStore(data: AddProduct[] | Product[]){
     this.cartStore$.next(data);
   }
 
@@ -55,7 +55,7 @@ export class CartService {
     });
     return this.http.put<{id: string, products: Product[]}>(`${environment.api}/cart`, {products: updateCart}).subscribe(res => {
       const result = res.products;
-      this.cartStore$.next(result)
+      this.updateLocalCartStore(result);
     });
   }
 
@@ -63,7 +63,7 @@ export class CartService {
     return this.http.put(`${environment.api}/cart/${id}`, null)
   }
 
-  getCartDB(){
+  getCartDB(): Subscription{
     const getToken = this.authService.getToken;
     const headerDict: any = {
       'Content-Type': 'application/json',
@@ -77,8 +77,11 @@ export class CartService {
     };
     return this.http.get(`${environment.api}/cart`, requestOptions).subscribe(res => {
       // @ts-ignore
-      const result = res['products'];
-      this.cartStore$.next(result)
+      if(res?.products){
+        // @ts-ignore
+        const result = res?.products;
+        this.updateLocalCartStore(result);
+      }
     })
   }
   decreaseProductQuantity(id: string){
@@ -93,7 +96,7 @@ export class CartService {
     if(this.authService.getToken){
       this.addProductOnCartDB(id).subscribe(res => {
         // @ts-ignore
-        this.updateLocalCartStore(res['products'])
+        this.updateLocalCartStore(res?.products)
       })
     }else {
       this.incrementOrDecrement('increment', id);
@@ -130,7 +133,7 @@ export class CartService {
 
       if(copyCartStore[idx].cartQuantity === 1 && type === 'decrement'){
         copyCartStore.splice(idx, 1);
-        this.cartStore$.next(copyCartStore);
+        this.updateLocalCartStore(copyCartStore);
         return
       }
 
@@ -140,8 +143,7 @@ export class CartService {
       if(type === 'decrement'){
         copyCartStore[idx].cartQuantity--
       }
-
-      this.cartStore$.next(copyCartStore);
+      this.updateLocalCartStore(copyCartStore);
     }
   }
 
@@ -151,7 +153,7 @@ export class CartService {
     if(hasProduct){
       const idx = copyCartStore.findIndex(elem => elem.product._id === _id);
       copyCartStore.splice(idx, 1);
-      this.cartStore$.next(copyCartStore);
+      this.updateLocalCartStore(copyCartStore);
     }
   }
 }
