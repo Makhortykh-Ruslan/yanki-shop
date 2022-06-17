@@ -50,5 +50,5 @@ export interface ProductService {
   getAllProducts(): Observable<Product[]>;
   getOneProduct(id: string): Observable<Product>;
   getCategories(): Observable<Catalog[]>;
-  // getFilteredProducts(querystring: string): Observable<Product[]>;
+  getFilteredProducts(querystring: ParamsProduct): Observable<GetFilteredProducts>;
 }

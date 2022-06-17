@@ -15,7 +15,7 @@ export class ProductsService implements ProductService{
     startPage: '1',
     perPage: '6',
     categories: '',
-    color: ''
+    color: '',
   };
   public productsState$: BehaviorSubject<ParamsProduct> = new BehaviorSubject<ParamsProduct>(this.paramsProductForFiltered);
 
@@ -29,8 +29,13 @@ export class ProductsService implements ProductService{
     return this.http.get<Product[]>(`${environment.api}/products`);
   }
 
-  getFilteredProducts(querystring: string): Observable<GetFilteredProducts> {
-    return this.http.get<GetFilteredProducts>(`${environment.api}/products/filter?${querystring}`);
+  getFilteredProducts(querystring: ParamsProduct): Observable<GetFilteredProducts> {
+    let params = ''
+    for(let elem in querystring){
+      // @ts-ignore
+      params += querystring[elem] ? `${elem}=${querystring[elem]}&` : ''
+    }
+    return this.http.get<GetFilteredProducts>(`${environment.api}/products/filter?${params}`);
   }
 
   getOneProduct(id: string): Observable<any> {

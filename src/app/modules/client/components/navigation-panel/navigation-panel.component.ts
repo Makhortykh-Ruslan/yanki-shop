@@ -28,14 +28,19 @@ export class NavigationPanelComponent implements OnInit {
         this.toggle = false;
         this.router.navigate(['/clientAccount']);
       }
-      this.router.navigate([value.link]);
+      this.toggle = false;
+      // this.router.navigate([value.link]);
     }else {
-      if (value.logIn) { this.dialog.open(LogInComponent, {
+      if (value.logIn) {
+        this.dialog.open(LogInComponent, {
         // height: window.innerWidth < 450 ? '100vh' : 'revert',
         maxWidth: window.innerWidth < 450 ? '90vw' : '80vw',
         scrollStrategy: new NoopScrollStrategy()
-      }); }
-      if (value.mobile) { this.toggle = false; }
+      });
+      }
+      if (value.mobile) {
+        this.toggle = false;
+      }
     }
 
   }

@@ -22,9 +22,9 @@ export class NotificationsService {
   private counter = 0;
   constructor() { }
 
-  notificationPreloader(value: boolean): void{
-    // this.preloader$.next(value);
-  }
+  // notificationPreloader(value: boolean): void{
+  //   // this.preloader$.next(value);
+  // }
   public notificationDialogSuccess(text: string, data?: {}): void{
     this.notificationSubject.next({type: 'success', text, data});
   }

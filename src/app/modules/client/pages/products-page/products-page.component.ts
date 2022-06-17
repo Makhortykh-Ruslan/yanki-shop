@@ -26,18 +26,26 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     });
   }
   onGetProducts(params: ParamsProduct): void{
-    this.productsService.getFilteredProducts(this.filteredParamsProducts(params)).subscribe(res => {
+    this.productsService.getFilteredProducts(params).subscribe(res => {
       this.dataProducts = res;
     }, error => {
     });
   }
-  filteredParamsProducts(params: ParamsProduct): string{
-    const {categories, perPage, startPage, size, color} = params;
-    const paramCategories = categories ? `categories=${categories}` : '';
-    const paramSize = size ? `size=${size}` : '';
-    const paramColor = color ? `color=${color}` : '';
-    return `${paramColor}&${paramSize}&${paramCategories}&startPage=${startPage}&perPage=${perPage}`;
-  }
+  // filteredParamsProducts(params: ParamsProduct): string{
+  //   console.log(params)
+  //   let res = ''
+  //   for(let elem in params){
+  //     // @ts-ignore
+  //     res += params[elem] ? `${elem}=${params[elem]}&` : ''
+  //   }
+  //   const {categories, perPage, startPage, size, color} = params;
+  //   const paramCategories = categories ? `categories=${categories}` : '';
+  //   const paramSize = size ? `size=${size}` : '';
+  //   const paramColor = color ? `color=${color}` : '';
+  //   console.log(`${color ? `color=${color}` : ''}&${size ? `size=${size}` : ''}&${categories ? `categories=${categories}` : ''}&startPage=${startPage}&perPage=${perPage}`)
+  //   // return `${paramColor}&${paramSize}&${paramCategories}&startPage=${startPage}&perPage=${perPage}`;
+  //   return res
+  // }
 
   onOpenProductPage(id: string): void {
     this.route.navigate(['/product', id]);

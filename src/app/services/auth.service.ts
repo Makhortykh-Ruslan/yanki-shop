@@ -11,8 +11,6 @@ import {NotificationsService} from './notifications.service';
   providedIn: 'root'
 })
 export class AuthService {
-  // error$: Subject<string> = new Subject<string>();
-  // success$: Subject<string> = new Subject<string>();
 
   constructor(
       private http: HttpClient,
