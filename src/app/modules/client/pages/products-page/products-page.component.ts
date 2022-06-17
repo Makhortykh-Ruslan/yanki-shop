@@ -33,10 +33,10 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   }
   filteredParamsProducts(params: ParamsProduct): string{
     const {categories, perPage, startPage, size, color} = params;
-    const paraCategories = categories ? `categories=${categories}` : '';
+    const paramCategories = categories ? `categories=${categories}` : '';
     const paramSize = size ? `size=${size}` : '';
     const paramColor = color ? `color=${color}` : '';
-    return `${paramColor}&${paramSize}&${paraCategories}&startPage=${startPage}&perPage=${perPage}`;
+    return `${paramColor}&${paramSize}&${paramCategories}&startPage=${startPage}&perPage=${perPage}`;
   }
 
   onOpenProductPage(id: string): void {
