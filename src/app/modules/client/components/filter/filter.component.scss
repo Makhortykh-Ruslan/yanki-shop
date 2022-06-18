@@ -1,8 +1,27 @@
 @import "src/app/app.component";
+@media (max-width: 500px) {
+  .filter-wrapper{
+    margin: 0 0 15px 0;
+  }
+}
 .filter-desktop{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 30px;
+  @media (max-width: 500px) {
+    .filter-desktop{
+      display: none;
+    }
+  }
+}
+.filter-mobile{
+  display: none;
+  @media (max-width: 500px) {
+    display: block;
+    .mat-expansion-panel-body{
+      padding: 0;
+    }
+  }
 }
 //mat-panel-title{
 //  font-size: $fontSizeBasic;

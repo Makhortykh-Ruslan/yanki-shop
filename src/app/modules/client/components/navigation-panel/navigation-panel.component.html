@@ -9,8 +9,8 @@
     <li class="header-item-li">
       <span (click)="openDialog({logIn: true, mobile: true})" class="header-item-dop" >Личный кабинет</span>
     </li>
-    <li routerLinkActive="active-link" *ngFor="let element of navigateLinks">
-      <a  (click)="onNavigation(element.link)" class="header-item">{{element.name}}</a>
+    <li  *ngFor="let element of navigateLinks">
+      <a   (click)="onNavigation(element.link)" class="header-item">{{element.name}}</a>
     </li>
     <li class="header-item-li">
       <a class="header-item-dop" href="#">условия возврата</a>

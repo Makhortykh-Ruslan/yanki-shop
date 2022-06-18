@@ -45,6 +45,7 @@
     list-style-type: none;
   }
   & .header-item{
+    cursor: pointer;
     @include basic-font-style;
     text-transform: uppercase;
     text-decoration: none;
@@ -152,6 +153,7 @@
     text-decoration: none;
   }
   .header-item-li{
+    cursor: pointer;
     display: block;
   }
   .header-left-item-container{
@@ -172,7 +174,4 @@
 .active-list{
   left: 0;
   height: 100vh;
-}
-.active-link{
-
 }

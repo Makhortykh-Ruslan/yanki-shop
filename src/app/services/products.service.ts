@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Catalog, GetFilteredProducts, ParamsProduct, Product, ProductService} from '../interfaces/products-interface';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, scan} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -30,11 +30,7 @@ export class ProductsService implements ProductService{
   }
 
   getFilteredProducts(querystring: ParamsProduct): Observable<GetFilteredProducts> {
-    let params = ''
-    for(let elem in querystring){
-      // @ts-ignore
-      params += querystring[elem] ? `${elem}=${querystring[elem]}&` : ''
-    }
+    const params = Object.entries(querystring).map((elem) => elem[1] ? `${elem[0]}=${elem[1]}&` : '').filter(elem => elem !== '').join('')
     return this.http.get<GetFilteredProducts>(`${environment.api}/products/filter?${params}`);
   }
 

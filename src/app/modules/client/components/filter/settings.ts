@@ -13,6 +13,6 @@ export const settingFilter: Filter[] = [
   },
   {
     nameFilter: 'Цена',
-    filterData: ['xs', 's', 'm', 'l', 'xl']
+    filterData: ['1000', '2000', '3000', '4000', '5000']
   }
 ];

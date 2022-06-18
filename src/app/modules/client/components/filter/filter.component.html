@@ -1,9 +1,17 @@
 <section class="filter-wrapper">
-<!--  <mat-accordion class="filter-elem filter-mobile" >-->
-<!--    <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <mat-panel-title>Фильтры</mat-panel-title>-->
-<!--      </mat-expansion-panel-header>-->
+  <mat-accordion class="filter-elem filter-mobile" >
+    <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Фильтры</mat-panel-title>
+      </mat-expansion-panel-header>
+      <section >
+        <mat-form-field  *ngFor="let filter of dataFilter" appearance="outline">
+          <mat-label>{{filter.nameFilter}}</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of filter.filterData" [value]="item" >{{item}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
 <!--      <mat-form-field class="filter-desktop" *ngFor="let filter of dataFilter" appearance="fill">-->
 <!--        <mat-label>{{filter.nameFilter}}</mat-label>-->
 <!--        <mat-select>-->
@@ -11,11 +19,11 @@
 <!--        </mat-select>-->
 <!--      </mat-form-field>-->
 
-<!--&lt;!&ndash;      <ul class="categories-list">&ndash;&gt;-->
-<!--&lt;!&ndash;                <li  (click)="onChangeFilter(filter)" class="categories-list-item" *ngFor="let elem of filter.filterData">{{elem}}</li>&ndash;&gt;-->
-<!--&lt;!&ndash;      </ul>&ndash;&gt;-->
-<!--    </mat-expansion-panel>-->
-<!--  </mat-accordion>-->
+<!--      <ul class="categories-list">-->
+<!--                <li  (click)="onChangeFilter(filter)" class="categories-list-item" *ngFor="let elem of filter.filterData">{{elem}}</li>-->
+<!--      </ul>-->
+    </mat-expansion-panel>
+  </mat-accordion>
   <section class="filter-desktop">
     <mat-form-field class="filter-desktop" *ngFor="let filter of dataFilter" appearance="outline">
       <mat-label>{{filter.nameFilter}}</mat-label>
