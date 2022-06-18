@@ -26,7 +26,7 @@ export class NavigationPanelComponent implements OnInit {
     if (isToken){
       if (value.mobile) {
         this.toggle = false;
-        this.router.navigate(['/clientAccount']);
+        this.router.navigate(['/clientAccount']).then(r => r);
       }
       this.toggle = false;
       // this.router.navigate([value.link]);
@@ -45,7 +45,8 @@ export class NavigationPanelComponent implements OnInit {
 
   }
 
-  onNavigation(): void {
+  onNavigation(link?: string): void {
     this.toggle = false;
+    this.router.navigate([link]).then(r => r);
   }
 }

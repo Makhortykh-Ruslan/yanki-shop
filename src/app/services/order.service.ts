@@ -46,7 +46,7 @@ export class OrderService {
     this.orderState.email = data.email;
     this.orderState.mobile = JSON.stringify(data.mobile);
     this.orderState.letterHtml =
-        "<h1>Тест.</h1><p>{Other details about order in your HTML}</p>"
+        "<h1>Тест.</h1><p>{Other details about-page order in your HTML}</p>"
   }
 
   getOrderState(){

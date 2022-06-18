@@ -3,7 +3,7 @@
     <p class="footer-section-title">{{footerTitle.name}}</p>
       <ul class="footer-section-list">
         <li class="footer-section-list-item" *ngFor="let item of footerTitle.list" >
-          <a class="footer-section-list-item-link" href="#">{{item.nameAndLinkRouter}}</a>
+          <a class="footer-section-list-item-link" [routerLink]="item.routerLink">{{item.nameAndLinkRouter}}</a>
         </li>
       </ul>
   </section>

@@ -7,15 +7,15 @@ export interface NavigateLink {
 export const routerNavigate: NavigateLink[] = [
   {
     name: 'new',
-    link: '',
+    link: '/news',
   },
   {
     name: 'каталог',
-    link: 'products',
+    link: '/products',
   },
   {
     name: 'о нас',
-    link: '',
+    link: '/about',
   },
 ];
 export const iconsArr: NavigateLink[] = [

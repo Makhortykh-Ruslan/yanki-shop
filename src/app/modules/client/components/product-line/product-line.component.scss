@@ -83,6 +83,7 @@
     @include basic-font-style;
   }
   & .product-line-tem:nth-child(6){
+    cursor: pointer;
     grid-area: f;
     @include basic-font-style;
   }

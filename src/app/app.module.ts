@@ -24,7 +24,6 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { HomeComponent } from './modules/client/components/home/home.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CardProductComponent } from './modules/client/components/card-product/card-product.component';
 import { MailingListComponent } from './modules/client/components/mailing-list/mailing-list.component';
@@ -50,6 +49,11 @@ import {PreloaderInterceptor} from './Interceptor/preloader.interceptor';
 import { CartPageComponent } from './modules/client/pages/cart-page/cart-page.component';
 import { ProductLineComponent } from './modules/client/components/product-line/product-line.component';
 import { OrderComponent } from './modules/client/components/order/order.component';
+import { NewsPageComponent } from './modules/client/pages/news-page/news-page.component';
+import { AboutPageComponent } from './modules/client/pages/about-page/about-page.component';
+import { ContactsPageComponent } from './modules/client/pages/contacts-page/contacts-page.component';
+import { PaymentAndDeliveryPageComponent } from './modules/client/pages/payment-and-delivery-page/payment-and-delivery-page.component';
+import { PageNotFoundComponent } from './modules/client/pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,6 @@ import { OrderComponent } from './modules/client/components/order/order.componen
     AuthorizationComponent,
     RegistrationComponent,
     CarouselComponent,
-    HomeComponent,
     CardProductComponent,
     MailingListComponent,
     ChangeAndReturnPageComponent,
@@ -80,7 +83,12 @@ import { OrderComponent } from './modules/client/components/order/order.componen
     ClientPrivateDataPrivateComponent,
     CartPageComponent,
     ProductLineComponent,
-    OrderComponent
+    OrderComponent,
+    NewsPageComponent,
+    AboutPageComponent,
+    ContactsPageComponent,
+    PaymentAndDeliveryPageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

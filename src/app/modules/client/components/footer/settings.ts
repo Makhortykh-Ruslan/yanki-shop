@@ -10,14 +10,14 @@ export const footerSettings = [
   {
     name: 'компания',
     list: [
-      {nameAndLinkRouter: 'о нас', routerLink: ''},
-      {nameAndLinkRouter: 'контакты', routerLink: ''}
+      {nameAndLinkRouter: 'о нас', routerLink: '/about'},
+      {nameAndLinkRouter: 'контакты', routerLink: '/contacts'}
     ]
   },
   {
     name: 'полезное',
     list: [
-      {nameAndLinkRouter: 'Оплата и доставка', routerLink: ''},
+      {nameAndLinkRouter: 'Оплата и доставка', routerLink: '/paymentAndDelivery'},
       {nameAndLinkRouter: 'Условия возврата', routerLink: ''},
       {nameAndLinkRouter: 'Бонусная система', routerLink: ''},
     ]

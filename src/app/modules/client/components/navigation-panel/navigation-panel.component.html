@@ -10,16 +10,16 @@
       <span (click)="openDialog({logIn: true, mobile: true})" class="header-item-dop" >Личный кабинет</span>
     </li>
     <li routerLinkActive="active-link" *ngFor="let element of navigateLinks">
-      <a  (click)="onNavigation()" [routerLink]="element.link" class="header-item" href="#">{{element.name}}</a>
+      <a  (click)="onNavigation(element.link)" class="header-item">{{element.name}}</a>
     </li>
     <li class="header-item-li">
       <a class="header-item-dop" href="#">условия возврата</a>
     </li>
     <li class="header-item-li">
-      <a class="header-item-dop" href="#">контакты</a>
+      <a (click)="onNavigation('/contacts')" class="header-item-dop">контакты</a>
     </li>
   </ul>
-  <span class="header-logo navigation-item">
+  <span [routerLink]="'/'" class="header-logo navigation-item">
       <img src="assets/images/YANKI.svg" alt="">
     </span>
   <div class="header-right-item-container navigation-item" >

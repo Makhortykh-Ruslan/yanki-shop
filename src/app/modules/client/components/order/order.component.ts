@@ -30,13 +30,14 @@ export class OrderComponent implements OnInit {
 
   onSubmitOrder() {
     if(localStorage.getItem('idToken')){
-      this.orderService.onChangeOrder(this.orderForm.value)
-      this.orderService.onCreateOrder(this.orderService.getOrderState()).subscribe(res => {
-        console.log('hello xxx', res)
-      })
+      this.notificationsService.notificationDialogSuccess('Спасибо за Ваш заказ!')
+      // this.orderService.onChangeOrder(this.orderForm.value)
+      // this.orderService.onCreateOrder(this.orderService.getOrderState()).subscribe(res => {
+      //   console.log('hello xxx', res)
+      // })
     }else {
       this.orderService.onChangeOrder(this.orderForm.value)
-      this.notificationsService.notificationDialogSuccess('Спасибо за Ваш заказ')
+      this.notificationsService.notificationDialogSuccess('Спасибо за Ваш заказ!')
     }
   }
 }
