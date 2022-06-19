@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Catalog, GetFilteredProducts, ParamsProduct, Product, ProductService} from '../interfaces/products-interface';
-import {BehaviorSubject, Observable, scan} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
 })
 export class ProductsService implements ProductService{
 
-  private paramsProductForFiltered: ParamsProduct = {
+  public paramsProductForFiltered: ParamsProduct = {
     size: '',
     startPage: '1',
     perPage: '6',
@@ -18,6 +18,7 @@ export class ProductsService implements ProductService{
     color: '',
   };
   public productsState$: BehaviorSubject<ParamsProduct> = new BehaviorSubject<ParamsProduct>(this.paramsProductForFiltered);
+  public filteredProducts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -41,4 +42,17 @@ export class ProductsService implements ProductService{
   getCategories(): Observable<Catalog[]> {
     return this.http.get<Catalog[]>(`${environment.api}/catalog`);
   }
+
+  onChangeFilterParams(params: ParamsProduct) {
+    this.loadingProducts(params);
+  }
+  loadingProducts(params: ParamsProduct){
+    this.getFilteredProducts(params).subscribe(res => {
+      this.setProductsState(res);
+    })
+  }
+  setProductsState(products: any){
+    this.filteredProducts$.next(products);
+  }
+
 }

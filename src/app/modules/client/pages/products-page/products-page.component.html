@@ -1,8 +1,11 @@
 <section class="products-wrapper">
   <app-categoris class="products-item"></app-categoris>
   <app-filter class="products-item"></app-filter>
-  <section *ngIf="dataProducts?.products?.length" class="products-item">
+  <section *ngIf="dataProducts?.products?.length; else elseBlock" class="products-item">
     <app-card-product (click)="onOpenProductPage(elem.itemNo)" [data]="elem" *ngFor="let elem of dataProducts?.products"></app-card-product>
   </section>
+  <ng-template #elseBlock>
+    <h3 class="products-item">По Вашему запросу ничего не найдено</h3>
+  </ng-template>
   <app-paginator *ngIf="dataProducts?.products?.length" class="products-item"></app-paginator>
 </section>

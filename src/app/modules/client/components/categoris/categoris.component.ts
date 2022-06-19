@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {NotificationsService} from '../../../../services/notifications.service';
 import {ProductsService} from '../../../../services/products.service';
 import {Catalog} from '../../../../interfaces/products-interface';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-categoris',
@@ -9,10 +10,12 @@ import {Catalog} from '../../../../interfaces/products-interface';
   styleUrls: ['./categoris.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CategorisComponent implements OnInit {
+export class CategorisComponent implements OnInit, OnDestroy {
   nameChoose = 'Каталог';
   public categories: Catalog[] | undefined;
   panelState = false;
+  subCategories$: Subscription | undefined;
+
 
   constructor(
       private notificationsService: NotificationsService,
@@ -23,16 +26,23 @@ export class CategorisComponent implements OnInit {
     this.onGetCategories();
   }
   onGetCategories(): void{
-    this.productsService.getCategories().subscribe(res => {
-      this.categories = res;
-    });
-  }
+    // @ts-ignore
+    this.categories = JSON.parse(sessionStorage.getItem('categories'));
+    // this.subCategories$ = this.productsService.getCategories().subscribe(res => {
+    //   this.categories = res;
+    // });
+  };
 
 
   onChangeCatalog(data: Catalog): void {
     this.panelState = !this.panelState;
     this.nameChoose = data.name;
-    const copy = {...this.productsService.productsState$.getValue(), categories: data.id};
-    this.productsService.productsState$.next(copy);
+    const params = {...this.productsService.productsState$.getValue(), categories: data.id};
+    this.productsService.onChangeFilterParams(params);
+    this.productsService.productsState$.next(params);
   }
+
+  ngOnDestroy(): void {
+    // this.subCategories$?.unsubscribe();
+  };
 }

@@ -21,37 +21,28 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-   this.subDataProducts$ =  this.productsService.productsState$.subscribe(params => {
-      this.onGetProducts(params);
+   // this.subDataProducts$ =  this.productsService.productsState$.subscribe(params => {
+   //   console.log('hello 1', params)
+   //    this.onGetProducts(params);
+   //  });
+    this.onGetProducts(this.productsService.productsState$.getValue());
+    this.subDataProducts$ = this.productsService.filteredProducts$.subscribe(products => {
+      this.dataProducts = products;
     });
   }
   onGetProducts(params: ParamsProduct): void{
-    this.productsService.getFilteredProducts(params).subscribe(res => {
-      this.dataProducts = res;
-    }, error => {
-    });
-  }
-  // filteredParamsProducts(params: ParamsProduct): string{
-  //   console.log(params)
-  //   let res = ''
-  //   for(let elem in params){
-  //     // @ts-ignore
-  //     res += params[elem] ? `${elem}=${params[elem]}&` : ''
-  //   }
-  //   const {categories, perPage, startPage, size, color} = params;
-  //   const paramCategories = categories ? `categories=${categories}` : '';
-  //   const paramSize = size ? `size=${size}` : '';
-  //   const paramColor = color ? `color=${color}` : '';
-  //   console.log(`${color ? `color=${color}` : ''}&${size ? `size=${size}` : ''}&${categories ? `categories=${categories}` : ''}&startPage=${startPage}&perPage=${perPage}`)
-  //   // return `${paramColor}&${paramSize}&${paramCategories}&startPage=${startPage}&perPage=${perPage}`;
-  //   return res
-  // }
+    this.productsService.loadingProducts(params);
+    // this.productsService.getFilteredProducts(params).subscribe(res => {
+    //   console.log('hello 2', params)
+    //   this.dataProducts = res;
+    // });
+  };
 
   onOpenProductPage(id: string): void {
     this.route.navigate(['/product', id]);
-  }
+  };
 
   ngOnDestroy(): void {
     this.subDataProducts$?.unsubscribe();
-  }
+  };
 }

@@ -34,11 +34,7 @@ export interface Catalog {
   __v: number;
 }
 export interface ParamsProduct {
-  color: string;
-  size: string;
-  perPage: string | number;
-  categories: string;
-  startPage: string;
+  [key: string]: string
 }
 export interface GetFilteredProducts {
   products: Product[];

@@ -9,12 +9,12 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 30px;
   @media (max-width: 500px) {
-    .filter-desktop{
+    .filter-desktop, .desktop-icon-clear{
       display: none;
     }
   }
 }
-.filter-mobile{
+.filter-mobile, .mobile-icon-clear{
   display: none;
   @media (max-width: 500px) {
     display: block;
@@ -22,6 +22,11 @@
       padding: 0;
     }
   }
+}
+.clear-filter{
+  cursor: pointer;
+  justify-self: center;
+  align-self: center;
 }
 //mat-panel-title{
 //  font-size: $fontSizeBasic;

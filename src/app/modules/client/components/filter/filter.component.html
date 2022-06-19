@@ -5,32 +5,32 @@
         <mat-panel-title>Фильтры</mat-panel-title>
       </mat-expansion-panel-header>
       <section >
-        <mat-form-field  *ngFor="let filter of dataFilter" appearance="outline">
-          <mat-label>{{filter.nameFilter}}</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let item of filter.filterData" [value]="item" >{{item}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <form [formGroup]="formFilter" action="">
+          <mat-form-field  *ngFor="let filter of dataFilter" appearance="outline">
+            <mat-label>{{filter.nameFilter}}</mat-label>
+            <mat-select formControlName="{{filter.params}}" [disabled]="filter.params === 'size' || filter.params === 'price'" (selectionChange)="onChangeFilter($event, filter.params)">
+              <mat-option *ngFor="let item of filter.filterData" [value]="item" >{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <span (click)="onClearFilter()"  class="clear-filter mobile-icon-clear">
+      clear filter
+    </span>
       </section>
-<!--      <mat-form-field class="filter-desktop" *ngFor="let filter of dataFilter" appearance="fill">-->
-<!--        <mat-label>{{filter.nameFilter}}</mat-label>-->
-<!--        <mat-select>-->
-<!--          <mat-option *ngFor="let item of filter.filterData" >{{item}}</mat-option>-->
-<!--        </mat-select>-->
-<!--      </mat-form-field>-->
-
-<!--      <ul class="categories-list">-->
-<!--                <li  (click)="onChangeFilter(filter)" class="categories-list-item" *ngFor="let elem of filter.filterData">{{elem}}</li>-->
-<!--      </ul>-->
     </mat-expansion-panel>
   </mat-accordion>
-  <section class="filter-desktop">
-    <mat-form-field class="filter-desktop" *ngFor="let filter of dataFilter" appearance="outline">
-      <mat-label>{{filter.nameFilter}}</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of filter.filterData" [value]="item" >{{item}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </section>
+  <form [formGroup]="formFilter" action="">
+    <section class="filter-desktop">
+      <mat-form-field class="filter-desktop" *ngFor="let filter of dataFilter" appearance="outline">
+        <mat-label>{{filter.nameFilter}}</mat-label>
+        <mat-select  formControlName="{{filter.params}}" [disabled]="filter.params === 'size' || filter.params === 'price'" (selectionChange)="onChangeFilter($event, filter.params)">
+          <mat-option *ngFor="let item of filter.filterData" [value]="item" >{{item}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <span (click)="onClearFilter()"  class="clear-filter desktop-icon-clear">
+      clear filter
+    </span>
+    </section>
+  </form>
 
 </section>

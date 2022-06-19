@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Filter, settingFilter} from './settings';
+import {settingFilter} from './settings';
+import {ProductsService} from '../../../../services/products.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -12,17 +14,37 @@ export class FilterComponent implements OnInit {
   panelOpenState = false;
   nameChoose = 'Каталог';
   dataFilter = settingFilter;
-  constructor() { }
+  formFilter: any = new FormBuilder();
+  constructor(private productsService: ProductsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.formFilter = this.fb.group({
+      size: '',
+      color: '',
+      price: ''
+    })
   }
-  // onChangeCatalog(data: Catalog) {
-  //   this.panelState = !this.panelState;
-  //   this.nameChoose = data.name;
-  //
-  // }
 
-  onChangeFilter(filter: Filter): void {
-    console.log('hello', filter)
+  onChangeFilter(event: any, paramsName: string): void {
+    if(event.value){
+      const copyParams = this.productsService.productsState$.getValue();
+      copyParams[paramsName] = event.value;
+      this.productsService.onChangeFilterParams(copyParams);
+      this.productsService.productsState$.next(copyParams);
+    }
+  }
+
+  onClearFilter() {
+    this.formFilter.reset();
+    this.formFilter = this.fb.group({
+      // size: '',
+      color: '',
+      // price: ''
+    });
+    const formValue = this.formFilter.value;
+    const copyParams = this.productsService.productsState$.getValue();
+    this.productsService.onChangeFilterParams({...copyParams, ...formValue});
+    this.productsService.productsState$.next({...copyParams, ...formValue});
+
   }
 }

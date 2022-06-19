@@ -17,6 +17,7 @@ export class RenderService {
   render(){
     this.setAllProductsLocal();
     this.getCartDBCustomer();
+    this.serCategories();
   }
 
   setAllProductsLocal(){
@@ -25,6 +26,11 @@ export class RenderService {
         sessionStorage.setItem('allProducts', JSON.stringify(res));
       })
     }
+  }
+  serCategories(){
+    this.productsService.getCategories().subscribe(res => {
+      sessionStorage.setItem('categories', JSON.stringify(res));
+    })
   }
   getCartDBCustomer(){
     if(this.authService.getToken){
