@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {settingFilter} from './settings';
 import {ProductsService} from '../../../../services/products.service';
 import {FormBuilder} from '@angular/forms';
@@ -9,7 +9,7 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./filter.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, OnDestroy {
   panelState = false;
   panelOpenState = false;
   nameChoose = 'Каталог';
@@ -46,5 +46,9 @@ export class FilterComponent implements OnInit {
     this.productsService.onChangeFilterParams({...copyParams, ...formValue});
     this.productsService.productsState$.next({...copyParams, ...formValue});
 
+  }
+
+  ngOnDestroy(): void {
+    this.productsService.productsDestroy();
   }
 }

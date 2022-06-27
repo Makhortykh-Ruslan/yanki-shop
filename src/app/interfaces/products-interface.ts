@@ -38,7 +38,7 @@ export interface ParamsProduct {
 }
 export interface GetFilteredProducts {
   products: Product[];
-  productsQuantity: number;
+  // productsQuantity: number;
 }
 
 export interface ProductService {

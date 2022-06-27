@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NotificationsService} from '../../../../services/notifications.service';
 import {ProductsService} from '../../../../services/products.service';
-import {GetFilteredProducts, ParamsProduct, Product} from '../../../../interfaces/products-interface';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscriber, Subscription} from 'rxjs';
+import {Product} from '../../../../interfaces/products-interface';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-products-page',
@@ -11,38 +11,24 @@ import {Subscriber, Subscription} from 'rxjs';
   styleUrls: ['./products-page.component.scss']
 })
 export class ProductsPageComponent implements OnInit, OnDestroy {
-  public dataProducts: GetFilteredProducts | undefined  = undefined;
-  private subDataProducts$: Subscription | undefined;
+  public dataProducts$: BehaviorSubject<Product[]> | undefined;
 
   constructor(
       private notificationsService: NotificationsService,
-      private productsService: ProductsService,
+      public productsService: ProductsService,
       private route: Router
   ) { }
 
   ngOnInit(): void {
-   // this.subDataProducts$ =  this.productsService.productsState$.subscribe(params => {
-   //   console.log('hello 1', params)
-   //    this.onGetProducts(params);
-   //  });
-    this.onGetProducts(this.productsService.productsState$.getValue());
-    this.subDataProducts$ = this.productsService.filteredProducts$.subscribe(products => {
-      this.dataProducts = products;
-    });
+    this.productsService.loadingProducts(this.productsService.productsState$.getValue());
+    this.dataProducts$ = this.productsService.filteredProducts$;
   }
-  onGetProducts(params: ParamsProduct): void{
-    this.productsService.loadingProducts(params);
-    // this.productsService.getFilteredProducts(params).subscribe(res => {
-    //   console.log('hello 2', params)
-    //   this.dataProducts = res;
-    // });
-  };
 
   onOpenProductPage(id: string): void {
     this.route.navigate(['/product', id]);
   };
 
   ngOnDestroy(): void {
-    this.subDataProducts$?.unsubscribe();
+    this.productsService.productsDestroy();
   };
 }
