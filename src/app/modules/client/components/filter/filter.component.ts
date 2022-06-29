@@ -49,6 +49,5 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.productsService.productsDestroy();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from '../../../../services/notifications.service';
 import {ProductsService} from '../../../../services/products.service';
 import {Product} from '../../../../interfaces/products-interface';
@@ -10,7 +10,7 @@ import {BehaviorSubject} from 'rxjs';
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss']
 })
-export class ProductsPageComponent implements OnInit, OnDestroy {
+export class ProductsPageComponent implements OnInit {
   public dataProducts$: BehaviorSubject<Product[]> | undefined;
 
   constructor(
@@ -25,10 +25,6 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   }
 
   onOpenProductPage(id: string): void {
-    this.route.navigate(['/product', id]);
-  };
-
-  ngOnDestroy(): void {
-    this.productsService.productsDestroy();
+    this.route.navigate(['/product', id]).then(r => r);
   };
 }

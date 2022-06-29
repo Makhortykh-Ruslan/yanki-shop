@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {
   Catalog,
   GetFilteredProducts,
@@ -14,7 +14,7 @@ import {environment} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService implements ProductService{
+export class ProductsService implements ProductService, OnDestroy{
 
   public paramsProductForFiltered: ParamsProduct = {
     size: '',
@@ -26,6 +26,7 @@ export class ProductsService implements ProductService{
   private subDestroy$: Subscription | undefined;
   public productsState$: BehaviorSubject<ParamsProduct> = new BehaviorSubject<ParamsProduct>(this.paramsProductForFiltered);
   public filteredProducts$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -56,12 +57,16 @@ export class ProductsService implements ProductService{
     this.loadingProducts(params);
   }
   loadingProducts(params: ParamsProduct): void{
-    this.subDestroy$ = this.getFilteredProducts(params).subscribe(products => {
+    this.subDestroy$ = this.getFilteredProducts(params)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(products => {
       this.filteredProducts$.next(products);
     })
   }
-  productsDestroy(): void{
-    // this.filteredProducts$.unsubscribe();
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }
