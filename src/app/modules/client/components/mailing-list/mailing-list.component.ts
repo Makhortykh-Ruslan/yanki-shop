@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-mailing-list',
@@ -8,8 +8,8 @@ import {FormControl, FormGroup} from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class MailingListComponent implements OnInit {
-  mailingForm: FormGroup = new FormGroup({
-    email: new FormControl('')
+  mailingForm: UntypedFormGroup = new UntypedFormGroup({
+    email: new UntypedFormControl('')
   });
 
   constructor() { }

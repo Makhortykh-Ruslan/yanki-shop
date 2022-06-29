@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {NotificationsService} from '../../../../../services/notifications.service';
 import {AuthService} from '../../../../../services/auth.service';
 import {User} from '../../../../../interfaces/auth-interface';
@@ -15,9 +15,9 @@ import {CartService} from '../../../../../services/cart.service';
 })
 export class AuthorizationComponent implements OnInit {
 
-  authForm: FormGroup = new FormGroup({
-    loginOrEmail: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(30)])
+  authForm: UntypedFormGroup = new UntypedFormGroup({
+    loginOrEmail: new UntypedFormControl('', [Validators.required, Validators.email]),
+    password: new UntypedFormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(30)])
   });
   submitted = false;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();

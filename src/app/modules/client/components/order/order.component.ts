@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {OrderService} from '../../../../services/order.service';
 import {NotificationsService} from '../../../../services/notifications.service';
 
@@ -10,14 +10,14 @@ import {NotificationsService} from '../../../../services/notifications.service';
 })
 export class OrderComponent implements OnInit {
 
-  public orderForm = new FormGroup({
-    country: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    address: new FormControl('', Validators.required),
-    postal: new FormControl('', Validators.required),
-    paymentInfo: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    mobile: new FormControl('', Validators.required)
+  public orderForm = new UntypedFormGroup({
+    country: new UntypedFormControl('', Validators.required),
+    city: new UntypedFormControl('', Validators.required),
+    address: new UntypedFormControl('', Validators.required),
+    postal: new UntypedFormControl('', Validators.required),
+    paymentInfo: new UntypedFormControl('', Validators.required),
+    email: new UntypedFormControl('', [Validators.required, Validators.email]),
+    mobile: new UntypedFormControl('', Validators.required)
   })
 
   constructor(
