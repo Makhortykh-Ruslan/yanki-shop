@@ -1,9 +1,9 @@
-<div [ngClass]="{'header-active-wrapper' : toggle}" class="header-container">
-  <div (click)="toggle = !toggle" id="menu-toggle" [ngClass]="{'active' : toggle}" class="hamburger">
+<header [ngClass]="{'header-active-wrapper' : toggle}" class="header-container">
+  <section (click)="toggle = !toggle" id="menu-toggle" [ngClass]="{'active' : toggle}" class="hamburger">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
-  </div>
+  </section>
   <ul [ngClass]="{'active-list': toggle}" class="header-left-item-container navigation-item">
 <!--    <input class="header-input" type="text">-->
     <li class="header-item-li">
@@ -22,8 +22,8 @@
   <span [routerLink]="'/'" class="header-logo navigation-item">
       <img src="assets/images/YANKI.svg" alt="">
     </span>
-  <div class="header-right-item-container navigation-item" >
+  <section class="header-right-item-container navigation-item" >
     <img src="assets/icons/icon-search.svg" alt="">
     <img class="header-right-item-img" *ngFor="let icon of navigateIcons" (click)="openDialog(icon)"  [routerLink]="icon.link"  [src]="icon.iconLink" [alt]="icon.name">
-  </div>
-</div>
+  </section>
+</header>
