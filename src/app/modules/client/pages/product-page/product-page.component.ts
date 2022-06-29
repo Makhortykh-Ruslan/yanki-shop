@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AddProduct, Product} from '../../../../interfaces/products-interface';
 import {CartService} from '../../../../services/cart.service';
-import {logger} from 'codelyzer/util/logger';
 import {AuthService} from '../../../../services/auth.service';
 
 @Component({
