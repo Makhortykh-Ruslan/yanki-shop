@@ -4,6 +4,10 @@
       <router-outlet></router-outlet>
     </div>
   <app-footer></app-footer>
-  <app-preloader *ngIf="notificationsService.preloader$ | async" class="preloader-container"></app-preloader>
+  <ng-container *ngIf="notificationsService.preloader$ | async">
+    <section class="preloader-container">
+      <mat-spinner></mat-spinner>
+    </section>
+  </ng-container>
 </div>
 

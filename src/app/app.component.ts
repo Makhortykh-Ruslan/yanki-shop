@@ -19,7 +19,7 @@ import {RenderService} from './services/render.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit, AfterViewChecked {
-  public preloaderState: boolean | any;
+  public preloaderState: boolean | undefined;
 
   constructor(
       public notificationsService: NotificationsService,

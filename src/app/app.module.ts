@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthService} from './services/auth.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
-import { PreloaderComponent } from './components/preloader/preloader.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -58,7 +57,6 @@ import { PageNotFoundComponent } from './modules/client/pages/page-not-found/pag
 @NgModule({
   declarations: [
     AppComponent,
-    PreloaderComponent,
     AlertComponent,
     ProductPageComponent,
     HomePageComponent,

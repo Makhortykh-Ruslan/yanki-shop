@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {PreloaderComponent} from '../../../../components/preloader/preloader.component';
 
 @Component({
   selector: 'app-home-page',
