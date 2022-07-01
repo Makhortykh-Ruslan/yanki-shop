@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const settingFilter = [{\n  nameFilter: 'Размер',\n  filterData: ['xs', 's', 'm', 'l', 'xl']\n}, {\n  nameFilter: 'Цвет',\n  filterData: ['0001', '0002', '0003', '0004', '0005']\n}, {\n  nameFilter: 'Цена',\n  filterData: ['xs', 's', 'm', 'l', 'xl']\n}];","map":null,"metadata":{},"sourceType":"module"}
