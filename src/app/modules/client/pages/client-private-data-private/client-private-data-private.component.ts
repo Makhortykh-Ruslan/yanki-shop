@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {CustomerInterface} from '../../../../interfaces/customer-interface';
 
 @Component({
@@ -24,12 +24,12 @@ export class ClientPrivateDataPrivateComponent implements OnInit {
   // __v: 0
   // _id: "6244b22eef1746001610457d"
   private customer: any;
-  formCustomer: UntypedFormGroup = new UntypedFormGroup({
-    email: new UntypedFormControl(''),
-    firstName: new UntypedFormControl(''),
-    lastName: new UntypedFormControl(''),
-    login: new UntypedFormControl(''),
-    telephone: new UntypedFormControl('')
+  formCustomer: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    login: new FormControl(''),
+    telephone: new FormControl('')
   });
 
   constructor() { }

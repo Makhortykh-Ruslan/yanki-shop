@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerInterface} from '../../../../../interfaces/customer-interface';
 import {AuthService} from '../../../../../services/auth.service';
 import {NotificationsService} from '../../../../../services/notifications.service';
@@ -14,13 +14,13 @@ import {CartService} from '../../../../../services/cart.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  public formRegistration: UntypedFormGroup = new UntypedFormGroup({
-    firstName: new UntypedFormControl('', Validators.required),
-    lastName:  new UntypedFormControl('', Validators.required),
-    login: new UntypedFormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
-    email: new UntypedFormControl('', [Validators.required, Validators.email]),
-    password: new UntypedFormControl('', [Validators.required,  Validators.minLength(7), Validators.maxLength(30)]),
-    telephone: new UntypedFormControl('', [Validators.required]),
+  public formRegistration: FormGroup = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName:  new FormControl('', Validators.required),
+    login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required,  Validators.minLength(7), Validators.maxLength(30)]),
+    telephone: new FormControl('', [Validators.required]),
   });
   public submitted = false;
 

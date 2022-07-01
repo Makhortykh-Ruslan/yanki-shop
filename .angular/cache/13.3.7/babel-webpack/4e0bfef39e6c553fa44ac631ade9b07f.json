@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const SettingNavigationClientPage = [{\n  nameTab: 'История заказов',\n  linkRouter: 'clientOrder'\n}, {\n  nameTab: 'Личные данные',\n  linkRouter: 'client'\n}, {\n  nameTab: 'Выход',\n  linkRouter: '/'\n}];","map":null,"metadata":{},"sourceType":"module"}

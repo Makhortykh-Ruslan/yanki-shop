@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {settingFilter} from './settings';
 import {ProductsService} from '../../../../services/products.service';
-import {UntypedFormBuilder} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -14,8 +14,8 @@ export class FilterComponent implements OnInit, OnDestroy {
   panelOpenState = false;
   nameChoose = 'Каталог';
   dataFilter = settingFilter;
-  formFilter: any = new UntypedFormBuilder();
-  constructor(private productsService: ProductsService, private fb: UntypedFormBuilder) { }
+  formFilter: any = new FormBuilder();
+  constructor(private productsService: ProductsService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.formFilter = this.fb.group({
